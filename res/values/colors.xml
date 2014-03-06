@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="window_bg">#ffeef1f3</color>
+    <color name="qqblue">#ff54acea</color>
+    <color name="transparent">#00000000</color>
+    
+    <color name="black">#ff000000</color>
+    <color name="dark_orange">#ffa61717</color>
+    <color name="text_blue">#ff1b4f92</color>
+
+    <color name="download">#ff12922E</color>
+
+    <color name="unfocused">#535353</color>
+    <color name="pressed">#ffFFA500</color>
+    <color name="white">#ffFFA500</color>
+    <color name="selected">#535353</color>
+    <color name="focused">#535353</color>
+
+
+</resources>

@@ -1,0 +1,396 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<base href="http://192.168.101.18:8088/htfsweb/">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link rel="icon" href="http://192.168.101.18:8088/htfsweb/favicon.ico"  rel="shortcut icon" type="image/x-icon" />
+<title>云会计 浩天云会计 在线记账平台_财务软件_记账软件_网上记账_网络账本_会计软件 SAAS平台</title>
+<meta content="云会计,记账,代理记账,在线记账,记账软件,网络账本,saas在线记账,财务会计,在线会计,浩天云会计,财务软件,神州浩天,SAAS平台" name="keywords" />
+<meta content="浩天云会计在线记账平台，免费试用，个体工商户及兼职会计皆可使用，应收应付，固定资产，出纳管理等相关财务软件模块一应俱全，随时可以导出数据，安全无忧，支持手机移动办公，老板随时查账，免升级和维护费用。只要能上网，没有任何地区和局域限制，随时可以管理账目。" name="description" />
+
+<link rel="stylesheet" type="text/css" href="http://192.168.101.18:8088/htfsweb/css/saas/dljzptStyleIE.css"/>
+<script type="text/javascript">
+
+
+var useDog=false;
+var checkDog=false;
+var userid='';
+var rightUser=false;
+var xmlrequest;
+xmlrequest=false;
+function InitObject()
+{
+    if(window.XMLHttpRequest){
+        xmlrequest = new XMLHttpRequest();
+    } else if(window.ActiveXObject){
+        xmlrequest = new ActiveXObject("Microsoft.XMLHTTP");
+    } else {
+        return;
+    }
+}
+var url;
+function isUseDog()
+{
+    if(!xmlrequest)
+        InitObject();
+
+    if(xmlrequest)
+    {
+        url="_0000_DogAction.do?method=checkIsUseDog";
+        xmlrequest.open("GET",url,false);
+        xmlrequest.onreadystatechange=UseDogResult;
+        xmlrequest.send(null);
+    }
+}
+function isRightProduct()//sn
+{
+    if(!xmlrequest)
+        InitObject();
+
+    if(xmlrequest)
+    {
+        if(ReadDog()==false){
+            return;
+        }
+        url="_0000_DogAction.do?method=checkSerialNum";
+        xmlrequest.open("POST",url,false);
+        xmlrequest.setRequestHeader('Content-type','application/x-www-form-urlencoded;text/html; charset=UTF-8');
+        xmlrequest.onreadystatechange=RightProductResult;
+        xmlrequest.send('serialNum='+ReadDog().sn);
+    }
+}
+function isRightUser(username)//sn
+{
+    if(!xmlrequest)
+        InitObject();
+
+    if(xmlrequest)
+    {
+        url="_0000_DogAction.do?method=checkUsersIdInDog";
+        xmlrequest.open("POST",url,false);
+        xmlrequest.setRequestHeader('Content-type','application/x-www-form-urlencoded;text/html; charset=utf-8');
+        xmlrequest.onreadystatechange=RightUserResult;
+        xmlrequest.send('id='+ReadDog().userid+'&username='+username);
+    }
+}
+function RightUserResult()
+{
+    if(xmlrequest.readyState==4) //准备好了
+    {
+        var response=xmlrequest.responseText;
+        //alert(response);
+        if(response=='true'){
+            rightUser=true;
+        }else{
+            rightUser=false;
+            alert('请使用正确的加密狗!');
+        }
+    }
+}
+function RightProductResult()
+{
+    if(xmlrequest.readyState==4) //准备好了
+    {
+        var response=xmlrequest.responseText;
+        //alert(response);
+        if(response=='true'){
+            userid=ReadDog().userid;
+        }else{
+            alert('请插入正确的加密狗');
+        }
+    }
+}
+function UseDogResult()
+{
+    if(xmlrequest.readyState==4) //准备好了
+    {
+        var response=xmlrequest.responseText;
+        if(response=='true'){
+            useDog=true;
+            if(ReadDog()==false){
+                return false;
+            }
+            userid=ReadDog().userid;
+            //isRightProduct()
+        }else{
+            useDog=false;
+        }
+        //document.getElementById("labeltime").value=response;
+        //document.write(response);
+    }
+}
+
+function ReadDog(){
+    var o={a:'1',b:'2'};
+    var errCode;
+    var data={company:'',sn:'',userid:''};
+    try{
+        DLControl1.command = 1;
+        DLControl1.bytes = 54;
+        DLControl1.addr = 0;
+        errCode = DLControl1.OperateDog();
+        if (errCode == 0)
+        {
+            data.company = DLControl1.memdata.substring(0,6);
+            //data.sn = DLControl1.memdata.substring(6,22);
+            //data.userid = DLControl1.memdata.substring(22,54);
+            data.userid = DLControl1.memdata.substring(6,38);
+            if(data.company!='SZHTKJ'){
+                alert('请使用正确的加密狗!');
+                checkDog=true;
+                return false;
+            }
+            checkDog=false;
+            return data;
+        }
+        else
+        {
+            alert('请确保已经插入加密狗,且加密狗驱动已成功安装!');
+            checkDog=true;
+            return false;
+            //return ReadDog();
+        }
+    }catch (e) {
+        alert('请将本网站加入IE信任列表,安装ActiveX控件,然后刷新页面!');
+        checkDog=true;
+        return false;
+    }
+
+
+
+}
+
+function validate(){
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    var code = document.getElementById('code').value;
+    // 判断浏览器类型以及版本号
+    var Sys = {};
+    var ua = navigator.userAgent.toLowerCase();
+    var s;
+    (s = ua.match(/msie ([\d.]+)/)) ? Sys.ie = s[1] :
+            (s = ua.match(/firefox\/([\d.]+)/)) ? Sys.firefox = s[1] :
+                    (s = ua.match(/chrome\/([\d.]+)/)) ? Sys.chrome = s[1] :
+                            (s = ua.match(/opera.([\d.]+)/)) ? Sys.opera = s[1] :
+                                    (s = ua.match(/version\/([\d.]+).*safari/)) ? Sys.safari = s[1] : 0;
+    /*
+     if (Sys.ie==6){
+     alert('不支持IE: 6.0,请使用IE:7.0或以上版版本。');
+     return;
+     }; */
+    //if (Sys.firefox) document.write('Firefox: ' + Sys.firefox);
+    //if (Sys.chrome) document.write('Chrome: ' + Sys.chrome);
+    //if (Sys.opera) document.write('Opera: ' + Sys.opera);
+    //if (Sys.safari) document.write('Safari: ' + Sys.safari);
+    if(username == ''){
+        document.getElementById('username').focus();
+        alert('请输入用户名');
+        return false;
+    }else if(password == ''){
+        document.getElementById('password').focus();
+        alert('请输入密码');
+        return false;
+    }else if(code == ''){
+        document.getElementById('code').focus();
+        alert('请输入验证码');
+        return false;
+    }else{
+        var form = document.getElementById('loginForm');
+        /**
+         isUseDog();
+         if(useDog){
+		 			if(checkDog){
+			 			return false;
+		 			}
+	 				isRightUser(username);
+		 			if(userid!=''&&rightUser){
+		 				form.submit();
+		 			}
+	 			}else{
+	 			}
+         */
+        form.submit();
+
+        //location.href = "main.jsp"
+    }
+}
+
+function keySubmit(event,id){
+    var evt = (event) ? event : ((window.event) ? window.event : "") //兼容IE和Firefox获得keyBoardEvent对象
+    var key = event.keyCode?evt.keyCode:event.which; //兼容IE和Firefox获得keyBoardEvent对象的键值
+    if (evt.keyCode == 13) {
+        if(id){
+            document.getElementById(id).focus();
+            return;
+        }
+        validate();
+    }
+}
+
+function changeCode(){
+    var img=document.getElementById('imgCode');
+    img.src="http://192.168.101.18:8088/htfsweb/"+"CodeServlet?cache="+(new Date());
+}
+</script>
+</head>
+
+
+<body
+        onload="document.getElementById('username').focus();"
+        >
+
+
+
+
+<!-- the header and navigation -->
+<div id="header">
+    <div id="header_in">
+        <div class="box">
+            <a href="http://192.168.101.18:8088/htfsweb/" class="main_logo">
+            </a>
+
+            <div class="home_login">
+                <a href="http://192.168.101.18:8088/htfsweb/login.jsp" class="btn1">登录</a>
+                <a href="http://192.168.101.18:8088/htfsweb/saas/stureg.jsp" class="btn2">注册</a>
+
+            </div>
+        </div>
+
+        <div id="nav">
+            <div id="nav_left">
+                <ul>
+                    <li><a href="http://192.168.101.18:8088/htfsweb/index.jsp" >首页</a></li>
+                    <li><a href="http://192.168.101.18:8088/htfsweb/saas/zxjz.jsp" >在线记账</a></li>
+                    <li><a href="http://192.168.101.18:8088/htfsweb/tr_UsersAction.do?method=findallHy" >在线实训</a></li><!-- http://192.168.101.18:8088/htfsweb/login.jsp -->
+                    <li><a href="http://192.168.101.18:8088/htfsweb/saas/buy.jsp" >购买服务</a></li>
+                    <li><a href="http://192.168.101.18:8088/htfsweb/helpDocAction.do?method=searchHelpDoc" >帮助中心 </a></li>
+                </ul>
+            </div>
+            <div id="nav_right">
+                <div style="float: right;">
+
+                    <!-- WPA Button Begin -->
+                    <script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzkzODA1OTM4NV81NTIzM180MDA3MzMzMzMzXw"></script>
+                    <!-- WPA Button End -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- the header and navigation end-->
+<div id="top_tihuan"></div>
+
+
+
+<div id="login">
+    <div id="login_in">
+        <form action="/htfsweb/j_spring_security_check" id="loginForm" method="post">
+            <table>
+                <tr>
+                    <td height = "37px" valign="center">账号:</td>
+                    <td height = "37px" valign="center"><input type = "text" size = "32" class = "login_input" id="username"  name="j_username"	value=""  onkeydown="keySubmit(event,'password');"></td>
+                </tr>
+
+                <tr>
+                    <td height = "37px" valign="center">密码:</td>
+                    <td height = "37px" valign="center"><input size = "32" class = "login_input" id="password"  name="j_password"  onkeydown="keySubmit(event,'code');" type="password" ></td>
+                </tr>
+
+                <tr>
+                    <td height = "37px" valign="center">验证:</td>
+                    <td height = "37px" valign="center">
+                        <input type = "text" size = "11" class = "login_input" id="code" name="code" onkeydown="keySubmit(event);" >
+                        <a href = "javascript:changeCode();">
+                            <img style="margin-left:15px;" align="absmiddle" id="imgCode" src="CodeServlet">
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td colspan="2" height = "30px" valign="center" align = "left">
+                        <a href = "#" class="btn1" onclick="validate();return false;">登录</a>
+                        <a href = "findPassword/step1.jsp" class="btn2">忘记密码？</a>
+                        <input type="hidden" name="mkxz" value="yymk">
+                    </td>
+                </tr>
+
+            </table>
+            <a href="saas/stureg.jsp" class="btn3"onmouseover="this.style.backgroundPosition='0 -49px'"
+               onmouseout="this.style.backgroundPosition='0 0'"
+               onmousedown="this.style.backgroundPosition='0 -98px'"
+               onmouseup="this.style.backgroundPosition='0 -49px'">
+            </a>
+        </form>
+    </div>
+</div>
+
+
+<div id="bottom_tihuan"></div>
+<div id="foot">
+    <div class="foot_in2">
+        <div class="links2" >
+            <a href="http://www.szhtkj.com.cn/" target="_blank">神州浩天科技 </a>
+            <a href="http://www.greatchn.com.cn/" target="_blank">神州浩天 </a>
+            <a href="http://www.htcst.com/" target="_blank">浩天财税通</a>
+            <a href="http://www.szsending.com" target="_blank">宁波SEO</a>
+        </div>
+    </div>
+    <div class="foot_in2">
+        <div class="links2" >
+            <a href="http://www.szhtkj.com.cn/" target="_blank">神州浩天科技 </a>
+            <a href="http://www.greatchn.com.cn/" target="_blank">神州浩天 </a>
+            <a href="http://www.htcst.com/" target="_blank">浩天财税通</a>
+            <a href="http://www.szsending.com" target="_blank">宁波SEO</a>
+        </div>
+    </div>
+    <div id="foot_in">
+        <div class="links"><a href="http://192.168.101.18:8088/htfsweb/saas/about.jsp">关于我们 </a><a href="http://192.168.101.18:8088/htfsweb/saas/lianxiwomen.jsp"> 联系我们 </a><a href="http://192.168.101.18:8088/htfsweb/saas/fl.jsp">法律声明 </a><a href="http://192.168.101.18:8088/htfsweb/saas/ys.jsp">隐私条款 </a><a href="#">服务条款 </a><a href="#">网站地图 </a></div>
+        <p>版权所有©：天津神州浩天科技有限公司  津B2-20090065-4</p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F5640c477346a4a460b9ac2955743d744' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42797531-1', 'htykj.com.cn');
+    ga('send', 'pageview');
+
+</script>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"6","bdPos":"right","bdTop":"100"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=86835285.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- Baidu Button END -->
+
+
+
+
+<input type='hidden' value='login.jsp'>
+
+</body>
+
+</html>
+
