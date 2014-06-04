@@ -1,4 +1,4 @@
-package com.szht.htfsweb.util;
+package com.szht.htfsweb.tools;
 
 
 import android.app.Dialog;
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
 
-public class AlertDialogCustom extends Dialog
+public class DatePickerDialogCustom extends Dialog
         implements View.OnClickListener {
     private Button cancel;
     private AlertDialogCancelListener cancelListener;
@@ -21,11 +21,11 @@ public class AlertDialogCustom extends Dialog
     private AlertDialogOKListener okListener;
     private TextView view;
 
-    public AlertDialogCustom(Context paramContext) {
+    public DatePickerDialogCustom(Context paramContext) {
         super(paramContext, R.style.dialog);
     }
 
-    public AlertDialogCustom(Context paramContext, int paramInt) {
+    public DatePickerDialogCustom(Context paramContext, int paramInt) {
         super(paramContext, paramInt);
     }
 
@@ -49,7 +49,7 @@ public class AlertDialogCustom extends Dialog
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         requestWindowFeature(1);
-        setContentView(R.layout.alert_dialog);
+        setContentView(R.layout.date_picker_dialog);
         Display localDisplay = getWindow().getWindowManager().getDefaultDisplay();
         WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
         localLayoutParams.width = (int) (0.95D * localDisplay.getWidth());

@@ -1,15 +1,14 @@
 package com.szht.htfsweb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.szht.htfsweb.activity.QueryActivity;
 import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
@@ -47,11 +46,20 @@ public class MainActivity extends ActivitySupport {
         setContentView(R.layout.main);
         ztlist = (ListView)findViewById(R.id.ztlist);
         ztAdapter = new ZtAdapter(context, ztArrayList);
+        View headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.zt_list_head,ztlist,false);
+        ztlist.addHeaderView(headerView);
         ztlist.setAdapter(ztAdapter);
         ztlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showToast(ztArrayList.get(i).getZtmc(),3000);
+                Zt zt = ztArrayList.get(i-1);
+                Intent mainIntent = new Intent(MainActivity.this, QueryActivity.class);
+                Bundle extras = new Bundle();
+                extras.putSerializable("zt", zt);
+                mainIntent.putExtras(extras);
+                MainActivity.this.startActivity(mainIntent);
+
+//                showToast(ztArrayList.get(i-1).getZtmc(),3000);
             }
         });
 
@@ -84,12 +92,13 @@ public class MainActivity extends ActivitySupport {
 
     private void syncZtList(){
         IUrlSync urlSync = new ZtAllSync();
+        urlSync.setSyncTitle("获取账套信息");
         urlSync.setToastContentFa("没有账套");
         urlSync.setHandler(ztHandler);
         UrlTask urlTask = new UrlTask(context);
         urlTask.setUrlSync(urlSync);
         urlTask.start();
-        showToast("正在获取账套列表……");
+//        showToast("正在获取账套列表……");
     }
 
 

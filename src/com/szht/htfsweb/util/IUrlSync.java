@@ -95,4 +95,8 @@ public interface IUrlSync {
 	public void addConnectNum();
 	public UserInfo getUser();
 	public void setUser(UserInfo user);
+
+    public String getSyncTitle();
+
+    public void setSyncTitle(String syncTitle);
 }

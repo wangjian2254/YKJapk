@@ -1,9 +1,11 @@
 package com.szht.htfsweb.model;
 
+import java.io.Serializable;
+
 /**
  * Created by WangJian on 14-3-6.
  */
-public class Zt {
+public class Zt implements Serializable {
     private String id;
     private String ztmc;
     private String qysj;

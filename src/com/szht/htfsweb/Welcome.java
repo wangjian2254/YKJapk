@@ -71,6 +71,7 @@ public class Welcome extends ActivitySupport {
             // 保存在线连接信息
             p.edit().clear().commit();
             IUrlSync urlSync = new LoginSync();
+            urlSync.setSyncTitle("登录验证");
             urlSync.addParm("j_username",username.getText().toString());
             urlSync.addParm("j_password",password.getText().toString());
             urlSync.setHandler(loginHandler);
@@ -79,7 +80,7 @@ public class Welcome extends ActivitySupport {
             urlTask.setUrlSync(urlSync);
             urlTask.start();
 
-            showToast("正在登录……",3000);
+//            showToast("正在登录……",3000);
         }
     }
 }

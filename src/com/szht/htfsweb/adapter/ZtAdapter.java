@@ -55,9 +55,9 @@ public class ZtAdapter extends BaseAdapter {
 
             holder = new ZtViewHolder();
             holder.ztmc = (TextView) localView.findViewById(R.id.ztmc);
-            holder.kjzd = (TextView) localView.findViewById(R.id.kjzd);
+//            holder.kjzd = (TextView) localView.findViewById(R.id.kjzd);
             holder.qysj = (TextView) localView.findViewById(R.id.qysj);
-            holder.qymc = (TextView) localView.findViewById(R.id.qymc);
+//            holder.qymc = (TextView) localView.findViewById(R.id.qymc);
 
             localView.setTag(holder);
         } else {
@@ -66,8 +66,8 @@ public class ZtAdapter extends BaseAdapter {
 
 
         holder.ztmc.setText(item.getZtmc());
-        holder.kjzd.setText(item.getKjzd());
-        holder.qymc.setText(item.getQymc());
+//        holder.kjzd.setText(item.getKjzd());
+//        holder.qymc.setText(item.getQymc());
         holder.qysj.setText(item.getQysj());
 
         holder.item = item;

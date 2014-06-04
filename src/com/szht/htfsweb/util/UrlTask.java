@@ -1,8 +1,10 @@
 package com.szht.htfsweb.util;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.webkit.CookieSyncManager;
+import com.szht.htfsweb.R;
 
 
 import java.io.*;
@@ -22,6 +24,7 @@ public  class UrlTask {
     private Context context;
     private static String get = "GET";
     private static String post = "POST";
+    private ProgressDialog mypDialog;
 
 
     public void handleResult(String result) {
@@ -35,6 +38,8 @@ public  class UrlTask {
 
 
                 String httpUrl = Convert.hosturl+urlSync.getUri();
+
+
 
 
                 HttpURLConnection con = null;
@@ -120,9 +125,7 @@ public  class UrlTask {
                             e.printStackTrace();
                         }
 
-
-
-
+                        mypDialog.dismiss();
                     } catch (IOException e) {
                         if(con!=null){
                             con.disconnect();
@@ -132,12 +135,14 @@ public  class UrlTask {
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
+                        mypDialog.dismiss();
                     }catch (Exception e) {
                         try {
                             urlSync.doFailureResult();
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
+                        mypDialog.dismiss();
                     }
 
             }
@@ -147,6 +152,17 @@ public  class UrlTask {
     }
 
     public void start() {
+        if(mypDialog!=null && mypDialog.isShowing()){
+            mypDialog.dismiss();
+        }
+        mypDialog=new ProgressDialog(context);
+        mypDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mypDialog.setTitle(urlSync.getSyncTitle());
+        mypDialog.setMessage("正在载入……");
+        mypDialog.setIcon(R.drawable.icon);
+        mypDialog.setIndeterminate(false);
+        mypDialog.setCancelable(true);
+        mypDialog.show();
         th2.start();
     }
 

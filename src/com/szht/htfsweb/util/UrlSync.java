@@ -31,6 +31,8 @@ public class UrlSync implements IUrlSync {
 	
 	private boolean isSync=false;
 	
+	private String syncTitle="";
+
 	private String noticeTitle="";
 	private String noticeContent="";
 	private String noticeCode="";
@@ -334,7 +336,13 @@ public class UrlSync implements IUrlSync {
 	public void setUser(UserInfo user) {
 		this.user = user;
 	}
-	
 
-	
+
+    public String getSyncTitle() {
+        return syncTitle;
+    }
+
+    public void setSyncTitle(String syncTitle) {
+        this.syncTitle = syncTitle;
+    }
 }
