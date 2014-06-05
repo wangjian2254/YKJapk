@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="120dp"
+            android:gravity="center_vertical"
+
+            android:paddingLeft="10dp"
+             >
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+              android:layout_height="70dp"
+              android:background="@drawable/head2"
+              android:paddingTop="10dp">
+    <TextView
+            android:id="@+id/querytxt"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:text="利润表"
+            android:textSize="24dp"
+            android:textColor="#fff" />
+</LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                  android:layout_height="50dp"
+                  android:background="@color/qqblue"
+                  android:paddingTop="10dp">
+        <TextView
+                android:id="@+id/qymc"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.6"
+                android:padding="2dp"
+                android:text="总公司：天津神州浩天科技有限公司"
+                android:textSize="12dp"
+                android:textColor="#fff" />
+        <TextView
+                android:id="@+id/bbmonth"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="80dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.1"
+                android:padding="1dp"
+                android:text="2013年09月"
+                android:textSize="12dp"
+                android:textColor="#fff" />
+        <TextView
+                android:id="@+id/bbdw"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.1"
+                android:padding="1dp"
+                android:text="金额单位：元"
+                android:textSize="12dp"
+                android:textColor="#fff" />
+    </LinearLayout>
+
+
+            
+        </LinearLayout>
+

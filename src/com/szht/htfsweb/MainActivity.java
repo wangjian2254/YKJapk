@@ -1,6 +1,7 @@
 package com.szht.htfsweb;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,13 +10,16 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.szht.htfsweb.activity.QueryActivity;
+import com.szht.htfsweb.activity.QueryResultActivity;
 import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
+import com.szht.htfsweb.sync.LRBSync;
+import com.szht.htfsweb.sync.SelectZtSync;
 import com.szht.htfsweb.sync.ZtAllSync;
-import com.szht.htfsweb.util.IUrlSync;
-import com.szht.htfsweb.util.UrlSync;
-import com.szht.htfsweb.util.UrlTask;
+import com.szht.htfsweb.tools.DatePickerDialogCustom;
+import com.szht.htfsweb.tools.YWDatePickerDialogCustom;
+import com.szht.htfsweb.util.*;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
@@ -35,6 +39,7 @@ public class MainActivity extends ActivitySupport {
     ListView ztlist;
     ZtAdapter ztAdapter;
     List<Zt> ztArrayList =new ArrayList<Zt>();
+    Zt selectzt=null;
     private Handler ztHandler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,12 +57,49 @@ public class MainActivity extends ActivitySupport {
         ztlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Zt zt = ztArrayList.get(i-1);
-                Intent mainIntent = new Intent(MainActivity.this, QueryActivity.class);
-                Bundle extras = new Bundle();
-                extras.putSerializable("zt", zt);
-                mainIntent.putExtras(extras);
-                MainActivity.this.startActivity(mainIntent);
+                // qyid，ztdm，ywrq
+
+
+                selectzt = ztArrayList.get(i-1);
+                final YWDatePickerDialogCustom localAlertDialogCustom = new YWDatePickerDialogCustom(context);
+                String[] y=new String[1];
+
+                y[0]=selectzt.getQysj().substring(0,4);
+                String[] m= QYSJArrayUtil.getMonthStrArr(selectzt.getQysj());
+                localAlertDialogCustom.setYearList(y);
+                localAlertDialogCustom.setMonthList(m);
+                localAlertDialogCustom.show();
+                localAlertDialogCustom.setMessage("选择业务日期");
+                localAlertDialogCustom.setOnOKListener("确定", new YWDatePickerDialogCustom.AlertDialogOKListener() {
+
+                    @Override
+                    public void onOKClick() {
+
+                        Convert.currentYear = localAlertDialogCustom.getSelectedYear();
+                        Convert.currentMonth = localAlertDialogCustom.getSelectedMonth();
+                        Convert.currentDay = localAlertDialogCustom.getSelectedDay();
+
+                        IUrlSync urlSync = new SelectZtSync();
+                        urlSync.setSyncTitle("选择账套");
+                        urlSync.setModth(IUrlSync.POST);
+                        urlSync.addParm("qyid", selectzt.getQyid());
+                        urlSync.addParm("ztid",selectzt.getId());
+                        urlSync.addParm("ywrq",Convert.currentYear+Convert.currentMonth+Convert.currentDay);
+                        urlSync.setToastContentFa("没有账套");
+                        urlSync.setHandler(ztHandler);
+                        UrlTask urlTask = new UrlTask(context);
+                        urlTask.setUrlSync(urlSync);
+                        urlTask.start();
+                    }
+                });
+                localAlertDialogCustom.setOnCancelListener("取消",new YWDatePickerDialogCustom.AlertDialogCancelListener(){
+
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
 
 //                showToast(ztArrayList.get(i-1).getZtmc(),3000);
             }
@@ -80,7 +122,13 @@ public class MainActivity extends ActivitySupport {
 
                     showToast(msg.obj.toString());
                 }
-
+                if(msg.arg1 == 3){
+                    Intent mainIntent = new Intent(MainActivity.this, QueryActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putSerializable("zt", selectzt);
+                    mainIntent.putExtras(extras);
+                    MainActivity.this.startActivity(mainIntent);
+                }
 
 
 

@@ -4,14 +4,15 @@ import android.content.Context;
 import android.os.Handler;
 import org.apache.http.NameValuePair;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public interface IUrlSync {
+public interface IUrlSync extends Serializable {
 	public static final String HTTPPARAM="?";
 
-	public static final String GET="get";
-	public static final String POST="post";
+	public static final String GET="GET";
+	public static final String POST="POST";
 	public static final String INFOALL="infoall";
 	public static final String INFOUPDATE="infoupdate";
 	public static final String INFOALLIMG="infoallimg";

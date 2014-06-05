@@ -58,9 +58,9 @@ public class UrlSync implements IUrlSync {
         StringBuffer p=null;
         if(GET.equals(modth)){
             if (getUri().indexOf("?")<0){
-                p=new StringBuffer("?");
+                p=new StringBuffer("?&");
             }else{
-                p=new StringBuffer();
+                p=new StringBuffer("&");
             }
 
         }else{

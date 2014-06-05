@@ -12,9 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.widget.ArrayWheelAdapter;
+import com.szht.htfsweb.widget.OnWheelChangedListener;
 import com.szht.htfsweb.widget.WheelView;
 
-public class DatePickerDialogCustom extends Dialog
+public class YWDatePickerDialogCustom extends Dialog
         implements View.OnClickListener {
     private Button cancel;
     private AlertDialogCancelListener cancelListener;
@@ -22,27 +23,99 @@ public class DatePickerDialogCustom extends Dialog
     private Button ok;
     private AlertDialogOKListener okListener;
     private TextView view;
-    private WheelView year,month;
+    private WheelView year,month,day;
     private String[] yeararr,montharr;
 
-    public DatePickerDialogCustom(Context paramContext) {
+    public YWDatePickerDialogCustom(Context paramContext) {
         super(paramContext, R.style.dialog);
+
     }
 
-    public DatePickerDialogCustom(Context paramContext, int paramInt) {
+    public YWDatePickerDialogCustom(Context paramContext, int paramInt) {
         super(paramContext, paramInt);
     }
 
     public void initUI(){
         year = (WheelView) findViewById(R.id.year);
         month = (WheelView) findViewById(R.id.month);
+        day = (WheelView) findViewById(R.id.day);
 
         year.setVisibleItems(3);
         month.setVisibleItems(3);
+        day.setVisibleItems(3);
         year.setAdapter(new ArrayWheelAdapter<String>(yeararr));
         month.setAdapter(new ArrayWheelAdapter<String>(montharr));
+        day.setAdapter(new ArrayWheelAdapter<String>(initDays()));
+        month.addChangingListener(new OnWheelChangedListener() {
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                String[] dayarr=initDays();
+
+                day.setAdapter(new ArrayWheelAdapter<String>(dayarr));
+            }
+        });
+
+
+
     }
 
+    private String[] initDays(){
+        String[] dayarr=null;
+        int m=Integer.valueOf(getSelectedMonth());
+        int y = Integer.valueOf(getSelectedYear());
+
+        boolean r=false;
+        if(y%100==0){
+            if(y%400==0){
+                r=true;
+            }
+        }else{
+            if(y%4==0){
+                r=true;
+            }
+        }
+        if(m==1||m==3||m==5||m==7||m==8||m==10||m==12){
+            dayarr=new String[31];
+            for(int i=1;i<=31;i++){
+                if(i<10){
+                    dayarr[i-1]="0"+i;
+                }else{
+                    dayarr[i-1]=""+i;
+                }
+            }
+        }else if(m==2){
+            if(r){
+                dayarr=new String[29];
+                for(int i=1;i<=29;i++){
+                    if(i<10){
+                        dayarr[i-1]="0"+i;
+                    }else{
+                        dayarr[i-1]=""+i;
+                    }
+                }
+            }else{
+                dayarr=new String[28];
+                for(int i=1;i<=28;i++){
+                    if(i<10){
+                        dayarr[i-1]="0"+i;
+                    }else{
+                        dayarr[i-1]=""+i;
+                    }
+                }
+            }
+
+
+        }else{
+            dayarr=new String[30];
+            for(int i=1;i<=30;i++){
+                if(i<10){
+                    dayarr[i-1]="0"+i;
+                }else{
+                    dayarr[i-1]=""+i;
+                }
+            }
+        }
+        return dayarr;
+    }
     public void setYearList(String[] yearList){
         yeararr=yearList;
 
@@ -57,6 +130,12 @@ public class DatePickerDialogCustom extends Dialog
     }
     public String getSelectedMonth(){
         return montharr[month.getCurrentItem()];
+    }
+    public String getSelectedDay(){
+        if(day.getCurrentItem()<9){
+            return "0"+day.getCurrentItem();
+        }
+        return ""+day.getCurrentItem();
     }
 
     public void onClick(View paramView) {
@@ -79,7 +158,7 @@ public class DatePickerDialogCustom extends Dialog
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         requestWindowFeature(1);
-        setContentView(R.layout.date_picker_dialog);
+        setContentView(R.layout.select_date_picker_dialog);
         Display localDisplay = getWindow().getWindowManager().getDefaultDisplay();
         WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
         localLayoutParams.width = (int) (0.95D * localDisplay.getWidth());
@@ -92,6 +171,7 @@ public class DatePickerDialogCustom extends Dialog
         this.cancel.setOnClickListener(this);
         setCanceledOnTouchOutside(false);
         initUI();
+
     }
 
     public void setMessage(String paramString) {

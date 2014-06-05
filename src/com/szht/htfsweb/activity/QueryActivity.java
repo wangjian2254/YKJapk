@@ -15,9 +15,12 @@ import com.szht.htfsweb.Welcome;
 import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
+import com.szht.htfsweb.sync.LRBSync;
 import com.szht.htfsweb.sync.ZtAllSync;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
+import com.szht.htfsweb.tools.YWDatePickerDialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
+import com.szht.htfsweb.util.QYSJArrayUtil;
 import com.szht.htfsweb.util.UrlTask;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
@@ -38,7 +41,7 @@ public class QueryActivity extends ActivitySupport  {
     TextView ztmc;
     private Calendar calendar = null;
     private Dialog mdialog;
-    private String queryrq=null;
+    private String year,month;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,23 +89,45 @@ public class QueryActivity extends ActivitySupport  {
 
 
     public void onQuery(View v) {
-        DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
+        final DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
+        String[] y=new String[1];
+        y[0]=zt.getQysj().substring(0,4);
+        String[] m= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+        localAlertDialogCustom.setYearList(y);
+        localAlertDialogCustom.setMonthList(m);
         localAlertDialogCustom.show();
         localAlertDialogCustom.setMessage("选择查询月份");
         localAlertDialogCustom.setOnOKListener("查询", new DatePickerDialogCustom.AlertDialogOKListener() {
 
             @Override
             public void onOKClick() {
-                Toast.makeText(context,"查询",Toast.LENGTH_LONG).show();
+
+                year = localAlertDialogCustom.getSelectedYear();
+                month = localAlertDialogCustom.getSelectedMonth();
+                IUrlSync sync=new LRBSync();
+                sync.setModth(IUrlSync.POST);
+                sync.addParm("kjnd",year);
+                sync.addParm("kjqjs",month);
+                sync.setSyncTitle("利润表");
+                sync.setToastContentFa("查询失败");
+
+                Intent mainIntent = new Intent(QueryActivity.this, QueryResultActivity.class);
+                Bundle extras = new Bundle();
+                extras.putSerializable("zt", zt);
+                extras.putSerializable("sync", sync);
+                mainIntent.putExtras(extras);
+                QueryActivity.this.startActivity(mainIntent);
             }
         });
-        localAlertDialogCustom.setOnCancelListener("取消", new DatePickerDialogCustom.AlertDialogCancelListener() {
+        localAlertDialogCustom.setOnCancelListener("取消",new DatePickerDialogCustom.AlertDialogCancelListener(){
+
 
             @Override
             public void onCancelClick() {
 
             }
         });
+
 
     }
 

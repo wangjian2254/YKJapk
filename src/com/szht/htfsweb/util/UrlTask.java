@@ -20,10 +20,9 @@ public  class UrlTask {
     private String pathName,appcode;
     private boolean stop=false;
 
-    private String method=get;
+
     private Context context;
-    private static String get = "GET";
-    private static String post = "POST";
+
     private ProgressDialog mypDialog;
 
 
@@ -45,7 +44,7 @@ public  class UrlTask {
                 HttpURLConnection con = null;
                 InputStream inputStream = null;
                     try {
-                        if(method.equals(get)){
+                        if(urlSync.getModth().equals(IUrlSync.GET)){
 
                             httpUrl+=urlSync.getParmString();
                         }
@@ -57,9 +56,9 @@ public  class UrlTask {
                         con.setConnectTimeout(30000);
                         // 设置读取数据超时时间为10000ms
                         con.setReadTimeout(30000);
-                        if(method.equals(post)){
+                        if(urlSync.getModth().equals(IUrlSync.POST)){
 
-                            con.setRequestMethod(post);
+                            con.setRequestMethod(IUrlSync.POST);
                             // http正文内，因此需要设为true
                             con.setDoOutput(true);
                             // Read from the connection. Default is true.
@@ -87,18 +86,20 @@ public  class UrlTask {
                             out.close();
 
                         }else{
-                            con.setRequestMethod(get);
+                            con.setRequestMethod(IUrlSync.GET);
                             con.connect();
                         }
 
 
                         //判断http status是否为HTTP/1.1 206 Partial Content或者200 OK
                         //如果不是以上两种状态，把status改为STATUS_HTTPSTATUS_ERROR
-                        if (con.getResponseCode() != HttpURLConnection.HTTP_OK
-                                && con.getResponseCode() != HttpURLConnection.HTTP_PARTIAL) {
+                        if (con.getResponseCode() == 500||con.getResponseCode() == 404) {
 
                             //失败
 //                                failDownload(failStr);
+                            inputStream = con.getInputStream();
+                            byte[] data = StreamTool.readInputStream(inputStream);
+                            String json = new String(data);
                             con.disconnect();
 
                         }
@@ -228,12 +229,7 @@ public  class UrlTask {
 //            return cookie;
 //        }
 //    }
-    public void setGet() {
-        this.method = get;
-    }
-    public void setPost() {
-        this.method = post;
-    }
+
 
     public void setUrlSync(IUrlSync urlSync) {
         this.urlSync = urlSync;
