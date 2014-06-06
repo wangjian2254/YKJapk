@@ -1,7 +1,6 @@
 package com.szht.htfsweb;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,14 +9,11 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.szht.htfsweb.activity.QueryActivity;
-import com.szht.htfsweb.activity.QueryResultActivity;
 import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
-import com.szht.htfsweb.sync.LRBSync;
 import com.szht.htfsweb.sync.SelectZtSync;
 import com.szht.htfsweb.sync.ZtAllSync;
-import com.szht.htfsweb.tools.DatePickerDialogCustom;
 import com.szht.htfsweb.tools.YWDatePickerDialogCustom;
 import com.szht.htfsweb.util.*;
 import com.umeng.analytics.MobclickAgent;

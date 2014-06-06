@@ -17,6 +17,7 @@
     <color name="focused">#535353</color>
 
     <color name="transparent">#00000000</color>
+    <color name="headback">#ff8d8d8d</color>
 
 
 </resources>

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by WangJian on 14-3-6.
  */
-public class BBItem implements Serializable {
+public class LRBItem implements Serializable {
     private String xm;
     private String bqje;
     private String sqje;

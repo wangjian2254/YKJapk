@@ -7,7 +7,7 @@
         >
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
-                  android:layout_height="70dp"
+                  android:layout_height="50dp"
                   android:background="@drawable/head2"
                   >
         <TextView
@@ -27,7 +27,9 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical|center_horizontal"
             >
-        <RelativeLayout android:layout_width="100dp"
+        <RelativeLayout
+                android:id="@+id/mod_lrb"
+                android:layout_width="100dp"
                       android:layout_height="100dp"
                       android:layout_weight="1.0"
                       android:orientation="vertical"
@@ -50,7 +52,9 @@
 
                  />
         </RelativeLayout>
-        <RelativeLayout android:layout_width="100dp"
+        <RelativeLayout
+                android:id="@+id/mod_zcfz"
+                android:layout_width="100dp"
                       android:layout_height="100dp"
                       android:layout_weight="1.0"
                       android:orientation="vertical"
@@ -72,7 +76,9 @@
                       android:layout_marginBottom="10dp"
                     />
         </RelativeLayout>
-        <RelativeLayout android:layout_width="100dp"
+        <RelativeLayout
+                android:id="@+id/mod_xjllb"
+                android:layout_width="100dp"
                       android:layout_height="100dp"
                       android:layout_weight="1.0"
                       android:orientation="vertical"

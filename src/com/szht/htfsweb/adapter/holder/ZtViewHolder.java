@@ -1,4 +1,4 @@
-package com.szht.htfsweb.adapter;
+package com.szht.htfsweb.adapter.holder;
 
 import android.app.AlertDialog;
 import android.content.Context;

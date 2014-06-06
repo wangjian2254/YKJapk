@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface IUrlSync extends Serializable {
@@ -27,6 +28,7 @@ public interface IUrlSync extends Serializable {
 	public void setResult(String result) ;
 	public boolean isGet();
 	public String getUri() ;
+    public Map<String,String> getParm();
     public  void addParm(String k,String v);
     public String getParmString();
 	public String getModth() ;

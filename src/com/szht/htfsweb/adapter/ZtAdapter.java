@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
+import com.szht.htfsweb.adapter.holder.ZtViewHolder;
 import com.szht.htfsweb.model.Zt;
 
 import java.util.List;

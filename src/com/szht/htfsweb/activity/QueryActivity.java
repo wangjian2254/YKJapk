@@ -1,34 +1,24 @@
 package com.szht.htfsweb.activity;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.*;
 import android.widget.*;
 import com.szht.htfsweb.R;
-import com.szht.htfsweb.Welcome;
-import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
 import com.szht.htfsweb.sync.LRBSync;
+import com.szht.htfsweb.sync.ZCFZSync;
 import com.szht.htfsweb.sync.ZtAllSync;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
-import com.szht.htfsweb.tools.YWDatePickerDialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
 import com.szht.htfsweb.util.QYSJArrayUtil;
 import com.szht.htfsweb.util.UrlTask;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.fb.FeedbackAgent;
-import com.umeng.update.UmengUpdateAgent;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class QueryActivity extends ActivitySupport  {
     /**
@@ -89,44 +79,91 @@ public class QueryActivity extends ActivitySupport  {
 
 
     public void onQuery(View v) {
-        final DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
-        String[] y=new String[1];
-        y[0]=zt.getQysj().substring(0,4);
-        String[] m= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
-        localAlertDialogCustom.setYearList(y);
-        localAlertDialogCustom.setMonthList(m);
-        localAlertDialogCustom.show();
-        localAlertDialogCustom.setMessage("选择查询月份");
-        localAlertDialogCustom.setOnOKListener("查询", new DatePickerDialogCustom.AlertDialogOKListener() {
+        switch (v.getId()){
+            case R.id.mod_lrb:
+                final DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
+                String[] y=new String[1];
+                y[0]=zt.getQysj().substring(0,4);
+                String[] m= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                localAlertDialogCustom.setYearList(y);
+                localAlertDialogCustom.setMonthList(m);
+                localAlertDialogCustom.show();
+                localAlertDialogCustom.setMessage("选择查询月份");
+                localAlertDialogCustom.setOnOKListener("查询", new DatePickerDialogCustom.AlertDialogOKListener() {
 
-            @Override
-            public void onOKClick() {
+                    @Override
+                    public void onOKClick() {
 
-                year = localAlertDialogCustom.getSelectedYear();
-                month = localAlertDialogCustom.getSelectedMonth();
-                IUrlSync sync=new LRBSync();
-                sync.setModth(IUrlSync.POST);
-                sync.addParm("kjnd",year);
-                sync.addParm("kjqjs",month);
-                sync.setSyncTitle("利润表");
-                sync.setToastContentFa("查询失败");
+                        year = localAlertDialogCustom.getSelectedYear();
+                        month = localAlertDialogCustom.getSelectedMonth();
+                        IUrlSync sync=new LRBSync();
+                        sync.setModth(IUrlSync.POST);
+                        sync.addParm("json","1");
+                        sync.addParm("kjnd",year);
+                        sync.addParm("kjqjs",month);
+                        sync.setSyncTitle("利润表");
+                        sync.setToastContentFa("查询失败");
 
-                Intent mainIntent = new Intent(QueryActivity.this, QueryResultActivity.class);
-                Bundle extras = new Bundle();
-                extras.putSerializable("zt", zt);
-                extras.putSerializable("sync", sync);
-                mainIntent.putExtras(extras);
-                QueryActivity.this.startActivity(mainIntent);
-            }
-        });
-        localAlertDialogCustom.setOnCancelListener("取消",new DatePickerDialogCustom.AlertDialogCancelListener(){
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryResultLRBActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                localAlertDialogCustom.setOnCancelListener("取消",new DatePickerDialogCustom.AlertDialogCancelListener(){
 
 
-            @Override
-            public void onCancelClick() {
+                    @Override
+                    public void onCancelClick() {
 
-            }
-        });
+                    }
+                });
+                break;
+            case R.id.mod_zcfz:
+                final DatePickerDialogCustom datePicker = new DatePickerDialogCustom(context);
+                String[] y2=new String[1];
+                y2[0]=zt.getQysj().substring(0,4);
+                String[] m2= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                datePicker.setYearList(y2);
+                datePicker.setMonthList(m2);
+                datePicker.show();
+                datePicker.setMessage("选择查询月份");
+                datePicker.setOnOKListener("查询", new DatePickerDialogCustom.AlertDialogOKListener() {
+
+                    @Override
+                    public void onOKClick() {
+
+                        year = datePicker.getSelectedYear();
+                        month = datePicker.getSelectedMonth();
+                        IUrlSync sync=new ZCFZSync();
+                        sync.setModth(IUrlSync.POST);
+                        sync.addParm("kjnd",year);
+                        sync.addParm("json","1");
+                        sync.addParm("kjqjs",month);
+                        sync.setSyncTitle("资产负债表");
+                        sync.setToastContentFa("查询失败");
+
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryResultZCFZActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                datePicker.setOnCancelListener("取消",new DatePickerDialogCustom.AlertDialogCancelListener(){
+
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
+                break;
+        }
+
 
 
     }

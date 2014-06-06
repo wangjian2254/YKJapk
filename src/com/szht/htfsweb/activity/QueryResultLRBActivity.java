@@ -7,22 +7,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.*;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.szht.htfsweb.R;
-import com.szht.htfsweb.Welcome;
+import com.szht.htfsweb.adapter.LRBAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
-import com.szht.htfsweb.sync.ZtAllSync;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
 import com.szht.htfsweb.util.QYSJArrayUtil;
 import com.szht.htfsweb.util.UrlTask;
-import com.umeng.fb.FeedbackAgent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-public class QueryResultActivity extends ActivitySupport  {
+public class QueryResultLRBActivity extends ActivitySupport  {
     /**
      * Called when the activity is first created.
      */
@@ -32,11 +31,13 @@ public class QueryResultActivity extends ActivitySupport  {
     Zt zt;
     TextView ztmc,qymc,bbmonth,bbdw;
     ListView querylist;
-    private Calendar calendar = null;
-    private Dialog mdialog;
-    private String year,month;
-    private IUrlSync sync;
-
+    Calendar calendar = null;
+    Dialog mdialog;
+    String year,month;
+    IUrlSync sync;
+    BaseAdapter lrbAdapter;
+    View headerView;
+    List<Object> list = new ArrayList<Object>();
     public static final int SEARCHPLUGIN = Menu.FIRST + 1;
     public static final int APPLIST = Menu.FIRST + 2;
 
@@ -44,22 +45,39 @@ public class QueryResultActivity extends ActivitySupport  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.queryresult);
+        setContentView(R.layout.queryresultlrb);
 
         querylist = (ListView)findViewById(R.id.querylist);
+        lrbAdapter = new LRBAdapter(context, list);
+        headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.query_list_head,querylist,false);
+
+        initUI();
+    }
+    public void initUI(){
         intent = this.getIntent();
         Bundle bunde = intent.getExtras();
         zt = (Zt)bunde.getSerializable("zt");
         sync = (IUrlSync)bunde.getSerializable("sync");
-        syncURL();
-        View headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.query_list_head,querylist,false);
+
         ztmc = (TextView)headerView.findViewById(R.id.querytxt);
+        if(ztmc==null){
+            ztmc = (TextView)findViewById(R.id.querytxt);
+        }
         qymc = (TextView)headerView.findViewById(R.id.qymc);
+        if(qymc==null){
+            qymc = (TextView)findViewById(R.id.qymc);
+        }
         qymc.setText(zt.getQymc());
         bbmonth = (TextView)headerView.findViewById(R.id.bbmonth);
+        if(bbmonth==null){
+            bbmonth = (TextView)findViewById(R.id.bbmonth);
+        }
         bbdw = (TextView)headerView.findViewById(R.id.bbdw);
+        if(bbdw==null){
+            bbdw = (TextView)findViewById(R.id.bbdw);
+        }
         querylist.addHeaderView(headerView);
-
+        querylist.setAdapter(lrbAdapter);
         ztmc.setText(sync.getSyncTitle());
         ztHandler = new Handler() {
 
@@ -68,7 +86,10 @@ public class QueryResultActivity extends ActivitySupport  {
 
                 // // 接收子线程的消息
                 if (msg.arg1 == 1) {
-
+                    List<Object> m = (List)msg.obj;
+                    list.clear();
+                    list.addAll(m);
+                    lrbAdapter.notifyDataSetChanged();
                 }
                 if (msg.arg1 == 2) {
 
@@ -81,10 +102,12 @@ public class QueryResultActivity extends ActivitySupport  {
             }
 
         };
+        sync.setHandler(ztHandler);
+        syncURL();
     }
 
     private void syncURL(){
-
+        initBBHead();
         sync.setHandler(ztHandler);
         UrlTask urlTask = new UrlTask(context);
         urlTask.setUrlSync(sync);
@@ -92,6 +115,9 @@ public class QueryResultActivity extends ActivitySupport  {
 //        showToast("正在获取账套列表……");
     }
 
+    private void initBBHead(){
+        bbmonth.setText(sync.getParm().get("kjnd")+"年"+sync.getParm().get("kjqjs")+"月");
+    }
 
 
     public void onQuery(View v) {
@@ -107,9 +133,10 @@ public class QueryResultActivity extends ActivitySupport  {
             @Override
             public void onOKClick() {
 
-                bbmonth.setText(localAlertDialogCustom.getSelectedYear()+"年"+localAlertDialogCustom.getSelectedMonth()+"月");
+
                 sync.addParm("kjnd",localAlertDialogCustom.getSelectedYear());
                 sync.addParm("kjqjs",localAlertDialogCustom.getSelectedMonth());
+
                 syncURL();
             }
         });

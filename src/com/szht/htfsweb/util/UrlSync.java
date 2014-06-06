@@ -50,6 +50,9 @@ public class UrlSync implements IUrlSync {
 	private UserInfo user;
 
     private Map<String,String> parm = new HashMap<String,String>();
+    public Map<String,String> getParm(){
+        return parm;
+    }
     public  void addParm(String k,String v){
         parm.put(k,v);
     }
