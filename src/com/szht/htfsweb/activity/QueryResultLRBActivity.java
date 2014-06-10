@@ -115,7 +115,7 @@ public class QueryResultLRBActivity extends ActivitySupport  {
 //        showToast("正在获取账套列表……");
     }
 
-    private void initBBHead(){
+    public void initBBHead(){
         bbmonth.setText(sync.getParm().get("kjnd")+"年"+sync.getParm().get("kjqjs")+"月");
     }
 

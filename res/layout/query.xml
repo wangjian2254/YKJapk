@@ -101,5 +101,140 @@
                     />
         </RelativeLayout>
     </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical|center_horizontal"
+            >
+        <RelativeLayout
+                android:id="@+id/mod_zz"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:onClick="onQuery"
+                >
+            <ImageView android:layout_width="100dp" android:layout_height="100dp"
+                       android:src="@drawable/zz"
+                    />
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="总账"
+                      android:layout_alignParentBottom="true"
+                      android:gravity="center_horizontal"
+                      android:textColor="#000"
+                      android:textSize="16dp"
+                      android:layout_marginBottom="10dp"
+
+                    />
+        </RelativeLayout>
+        <RelativeLayout
+                android:id="@+id/mod_mx"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:onClick="onQuery"
+                >
+            <ImageView android:layout_width="100dp" android:layout_height="100dp"
+                       android:src="@drawable/mx"
+                    />
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="明细账"
+                      android:layout_alignParentBottom="true"
+                      android:gravity="center_horizontal"
+                      android:textColor="#000"
+                      android:textSize="16dp"
+                      android:layout_marginBottom="10dp"
+                    />
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                >
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:orientation="horizontal"
+                  android:gravity="center_vertical|center_horizontal"
+            >
+        <RelativeLayout
+                android:id="@+id/mod_pzcx"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:onClick="onQuery"
+                >
+            <ImageView android:layout_width="100dp" android:layout_height="100dp"
+                       android:src="@drawable/pzcx"
+                    />
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="凭证查询"
+                      android:layout_alignParentBottom="true"
+                      android:gravity="center_horizontal"
+                      android:textColor="#000"
+                      android:textSize="16dp"
+                      android:layout_marginBottom="10dp"
+
+                    />
+        </RelativeLayout>
+        <RelativeLayout
+                android:id="@+id/mod_pzlr"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:onClick="onQuery"
+                >
+            <ImageView android:layout_width="100dp" android:layout_height="100dp"
+                       android:src="@drawable/zcfzb"
+                    />
+            <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                      android:text="凭证录入"
+                      android:layout_alignParentBottom="true"
+                      android:gravity="center_horizontal"
+                      android:textColor="#000"
+                      android:textSize="16dp"
+                      android:layout_marginBottom="10dp"
+                    />
+        </RelativeLayout>
+        <RelativeLayout
+                android:id="@+id/mod_xjllb"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/query_item_selector"
+                android:gravity="center_vertical|center_horizontal"
+                >
+
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
 

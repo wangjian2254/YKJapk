@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".activity.QueryResultZCFZActivity">
         </activity>
+        <activity android:name=".activity.QueryResultXJLLActivity">
+        </activity>
 
         <!-- Fb Activitys Start -->
         <!--

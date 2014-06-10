@@ -11,8 +11,10 @@ import com.szht.htfsweb.R;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.Zt;
 import com.szht.htfsweb.sync.LRBSync;
+import com.szht.htfsweb.sync.XJLLSync;
 import com.szht.htfsweb.sync.ZCFZSync;
 import com.szht.htfsweb.sync.ZtAllSync;
+import com.szht.htfsweb.tools.DatePicker3DialogCustom;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
 import com.szht.htfsweb.util.QYSJArrayUtil;
@@ -154,6 +156,48 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 datePicker.setOnCancelListener("取消",new DatePickerDialogCustom.AlertDialogCancelListener(){
+
+
+                    @Override
+                    public void onCancelClick() {
+
+                    }
+                });
+                break;
+            case R.id.mod_xjllb:
+                final DatePicker3DialogCustom datePicker3 = new DatePicker3DialogCustom(context);
+                String[] y3=new String[1];
+                y3[0]=zt.getQysj().substring(0,4);
+                String[] m3= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                datePicker3.setYearList(y3);
+                datePicker3.setMonthList(m3);
+                datePicker3.show();
+                datePicker3.setMessage("选择查询月份");
+                datePicker3.setOnOKListener("查询", new DatePicker3DialogCustom.AlertDialogOKListener() {
+
+                    @Override
+                    public void onOKClick() {
+
+                        year = datePicker3.getSelectedYear();
+                        month = datePicker3.getSelectedMonth();
+                        IUrlSync sync=new XJLLSync();
+                        sync.setModth(IUrlSync.POST);
+                        sync.addParm("kjnd", year);
+                        sync.addParm("json","1");
+                        sync.addParm("ybjbnb",datePicker3.getYbJbNb());
+                        sync.addParm("kjqjs",month);
+                        sync.setSyncTitle("现金流量表");
+                        sync.setToastContentFa("查询失败");
+
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryResultZCFZActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                datePicker3.setOnCancelListener("取消",new DatePicker3DialogCustom.AlertDialogCancelListener(){
 
 
                     @Override

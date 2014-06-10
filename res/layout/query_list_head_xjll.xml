@@ -17,7 +17,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:padding="2dp"
-            android:text="利润表"
+            android:text="现金流量表"
             android:textSize="24dp"
             android:textColor="#fff" />
 </LinearLayout>
@@ -38,7 +38,7 @@
         <TextView
                 android:id="@+id/bbmonth"
                 android:gravity="center_vertical|center_horizontal"
-                android:layout_width="80dp"
+                android:layout_width="100dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="0.1"
                 android:padding="1dp"
@@ -67,7 +67,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="6.0"
                 android:padding="2dp"
-                android:textSize="16dp"
+                android:textSize="13dp"
                 android:text="项目"
                 android:textColor="#000" />
         <TextView
@@ -77,8 +77,8 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="0.3"
                 android:padding="2dp"
-                android:text="本期金额"
-                android:textSize="16dp"
+                android:text="本年累计金额"
+                android:textSize="13dp"
                 android:textColor="#000" />
         <TextView
                 android:id="@+id/txt2"
@@ -87,8 +87,8 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="0.3"
                 android:padding="2dp"
-                android:text="上期金额"
-                android:textSize="16dp"
+                android:text="本期金额"
+                android:textSize="13dp"
                 android:textColor="#000" />
 
 

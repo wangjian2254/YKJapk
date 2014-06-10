@@ -5,6 +5,17 @@
     <ImageView android:background="#ffd6d6d6" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="15.0dip" />
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
 
+        <RadioGroup  android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" >
+            <RadioButton android:id="@+id/yb"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="月报" android:textColor="#000" android:textSize="23dp" android:layout_marginRight="10dp" android:checked="true"/>
+            <RadioButton android:id="@+id/jb"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="季报" android:textColor="#000" android:textSize="23dp" android:layout_marginRight="10dp"  />
+            <RadioButton android:id="@+id/nb"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="年报" android:textColor="#000" android:textSize="23dp" />
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+
         <com.szht.htfsweb.widget.WheelView android:id="@+id/year"
                                            android:layout_height="wrap_content"
                                            android:layout_width="wrap_content"
