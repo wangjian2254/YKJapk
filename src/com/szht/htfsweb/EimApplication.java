@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author WangJian
  */
-public class EimApplication extends Application {
+public class EimApplication extends com.activeandroid.app.Application {
     private List<Activity> activityList = new LinkedList<Activity>();
 
     // 添加Activity到容器中

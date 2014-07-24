@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.szht.htfsweb.model.Zt;
+import com.szht.htfsweb.db.ZtInfo;
 
 public class ZtViewHolder implements OnClickListener {
     public TextView ztmc;
@@ -18,7 +18,7 @@ public class ZtViewHolder implements OnClickListener {
     public TextView kjzd;
     public TextView qysj;
 
-    public Zt item;
+    public ZtInfo item;
     public Context mContext;
 
     @Override
@@ -26,12 +26,12 @@ public class ZtViewHolder implements OnClickListener {
         delAddress(item);
     }
 
-    public void delAddress(Zt item) {
+    public void delAddress(ZtInfo item) {
         TextView eDeleteW = new TextView(mContext);
         LinearLayout.LayoutParams eLayoutParam = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT
                 , LinearLayout.LayoutParams.WRAP_CONTENT);
         eDeleteW.setPadding(10, 10, 10, 10);
-        eDeleteW.setText("是否进入 \"" + item.getZtmc() + "\"");
+        eDeleteW.setText("是否进入 \"" + item.ztmc + "\"");
         eDeleteW.setTextColor(Color.WHITE);
         eDeleteW.setTextSize(14);
         eDeleteW.setLayoutParams(eLayoutParam);

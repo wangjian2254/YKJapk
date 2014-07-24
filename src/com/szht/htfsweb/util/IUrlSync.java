@@ -102,4 +102,12 @@ public interface IUrlSync extends Serializable {
     public String getSyncTitle();
 
     public void setSyncTitle(String syncTitle);
+
+    public boolean isIsjson();
+
+    public void setIsjson(boolean isjson);
+
+    public String getJsonparm();
+
+    public void setJsonparm(String jsonparm);
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/bg2"
+        >
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                  android:layout_height="50dp"
+                  android:background="@drawable/head2"
+                  android:paddingTop="10dp">
+        <TextView
+                android:id="@+id/querytitle"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:text="总账"
+                android:textSize="24dp"
+                android:textColor="#fff" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                  android:layout_height="30dp"
+                  android:background="@color/qqblue"
+                  android:paddingTop="2dp">
+        <TextView
+                android:id="@+id/kjkm"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.3"
+                android:padding="2dp"
+                android:text="会计科目：1002001：人民币"
+                android:textSize="12dp"
+                android:textColor="#fff" />
+
+        <TextView
+                android:id="@+id/kjqj"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.1"
+                android:padding="1dp"
+                android:text="期间：2013.08-09"
+                android:textSize="12dp"
+                android:textColor="#fff" />
+    </LinearLayout>
+    <HorizontalScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ListView android:id="@+id/querylist" android:layout_width="wrap_content" android:layout_height="fill_parent">
+
+        </ListView>
+    </HorizontalScrollView>
+
+</LinearLayout>
+

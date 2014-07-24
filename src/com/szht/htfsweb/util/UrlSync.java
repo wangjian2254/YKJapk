@@ -16,6 +16,8 @@ import java.util.Map;
 public class UrlSync implements IUrlSync {
 	private int connectNum;
 	public final    String uri="";
+    private boolean isjson=false;
+    private String jsonparm="";
 	private Context mainContext;
 	private Context pluginContext;
 	private String pluginActionStr;
@@ -58,6 +60,10 @@ public class UrlSync implements IUrlSync {
     }
 
     public String getParmString(){
+        if(isjson){
+
+            return jsonparm;
+        }
         StringBuffer p=null;
         if(GET.equals(modth)){
             if (getUri().indexOf("?")<0){
@@ -347,5 +353,21 @@ public class UrlSync implements IUrlSync {
 
     public void setSyncTitle(String syncTitle) {
         this.syncTitle = syncTitle;
+    }
+
+    public boolean isIsjson() {
+        return isjson;
+    }
+
+    public void setIsjson(boolean isjson) {
+        this.isjson = isjson;
+    }
+
+    public String getJsonparm() {
+        return jsonparm;
+    }
+
+    public void setJsonparm(String jsonparm) {
+        this.jsonparm = jsonparm;
     }
 }

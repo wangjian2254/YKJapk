@@ -8,10 +8,12 @@ import android.os.Message;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.activeandroid.query.Select;
 import com.szht.htfsweb.activity.QueryActivity;
 import com.szht.htfsweb.adapter.ZtAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
-import com.szht.htfsweb.model.Zt;
+import com.szht.htfsweb.db.ZtInfo;
+import com.szht.htfsweb.sync.BaseConfigSync;
 import com.szht.htfsweb.sync.SelectZtSync;
 import com.szht.htfsweb.sync.ZtAllSync;
 import com.szht.htfsweb.tools.YWDatePickerDialogCustom;
@@ -34,8 +36,8 @@ public class MainActivity extends ActivitySupport {
 
     ListView ztlist;
     ZtAdapter ztAdapter;
-    List<Zt> ztArrayList =new ArrayList<Zt>();
-    Zt selectzt=null;
+    List<ZtInfo> ztArrayList =new ArrayList<ZtInfo>();
+    ZtInfo selectzt=null;
     private Handler ztHandler;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,14 @@ public class MainActivity extends ActivitySupport {
         agent.sync();
         setContentView(R.layout.main);
         ztlist = (ListView)findViewById(R.id.ztlist);
+        if(Convert.currentUser==null){
+            Intent mainIntent = new Intent(this, Welcome.class);
+
+            this.startActivity(mainIntent);
+            finish();
+            return;
+        }
+        ztArrayList = new Select().from(ZtInfo.class).where("User = ?",Convert.currentUser.getId()).execute();
         ztAdapter = new ZtAdapter(context, ztArrayList);
         View headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.zt_list_head,ztlist,false);
         ztlist.addHeaderView(headerView);
@@ -60,8 +70,8 @@ public class MainActivity extends ActivitySupport {
                 final YWDatePickerDialogCustom localAlertDialogCustom = new YWDatePickerDialogCustom(context);
                 String[] y=new String[1];
 
-                y[0]=selectzt.getQysj().substring(0,4);
-                String[] m= QYSJArrayUtil.getMonthStrArr(selectzt.getQysj());
+                y[0]=selectzt.qysj.substring(0,4);
+                String[] m= QYSJArrayUtil.getMonthStrArr(selectzt.qysj);
                 localAlertDialogCustom.setYearList(y);
                 localAlertDialogCustom.setMonthList(m);
                 localAlertDialogCustom.show();
@@ -78,8 +88,8 @@ public class MainActivity extends ActivitySupport {
                         IUrlSync urlSync = new SelectZtSync();
                         urlSync.setSyncTitle("选择账套");
                         urlSync.setModth(IUrlSync.POST);
-                        urlSync.addParm("qyid", selectzt.getQyid());
-                        urlSync.addParm("ztid",selectzt.getId());
+                        urlSync.addParm("qyid", selectzt.qyid);
+                        urlSync.addParm("ztid",selectzt.ztdm);
                         urlSync.addParm("ywrq",Convert.currentYear+Convert.currentMonth+Convert.currentDay);
                         urlSync.setToastContentFa("没有账套");
                         urlSync.setHandler(ztHandler);
@@ -108,8 +118,8 @@ public class MainActivity extends ActivitySupport {
 
                 // // 接收子线程的消息
                 if (msg.arg1 == 1) {
-                    List<Zt> m = (List)msg.obj;
-
+                    List<ZtInfo> m = (List)msg.obj;
+                    ztArrayList.clear();
                     ztArrayList.addAll(m);
                     ztAdapter.notifyDataSetChanged();
 
@@ -119,6 +129,16 @@ public class MainActivity extends ActivitySupport {
                     showToast(msg.obj.toString());
                 }
                 if(msg.arg1 == 3){
+                    BaseConfigSync urlSync = new BaseConfigSync();
+                    urlSync.setSyncTitle("获取账套系统信息");
+                    urlSync.setZt(selectzt);
+                    urlSync.setToastContentFa("没有账套");
+                    urlSync.setHandler(ztHandler);
+                    UrlTask urlTask = new UrlTask(context);
+                    urlTask.setUrlSync(urlSync);
+                    urlTask.start();
+                }
+                if(msg.arg1 == 4){
                     Intent mainIntent = new Intent(MainActivity.this, QueryActivity.class);
                     Bundle extras = new Bundle();
                     extras.putSerializable("zt", selectzt);
@@ -128,15 +148,20 @@ public class MainActivity extends ActivitySupport {
 
 
 
+
             }
 
         };
+
         syncZtList();
     }
 
     private void syncZtList(){
         IUrlSync urlSync = new ZtAllSync();
-        urlSync.setSyncTitle("获取账套信息");
+        if(ztArrayList.size()==0){
+            urlSync.setSyncTitle("获取账套信息");
+        }
+
         urlSync.setToastContentFa("没有账套");
         urlSync.setHandler(ztHandler);
         UrlTask urlTask = new UrlTask(context);

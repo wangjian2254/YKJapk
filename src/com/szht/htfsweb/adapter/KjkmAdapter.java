@@ -7,19 +7,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
+import com.szht.htfsweb.adapter.holder.KjkmViewHolder;
 import com.szht.htfsweb.adapter.holder.ZtViewHolder;
+import com.szht.htfsweb.db.Kjkm;
 import com.szht.htfsweb.db.ZtInfo;
 
 import java.util.List;
 
-public class ZtAdapter extends BaseAdapter {
+public class KjkmAdapter extends BaseAdapter {
     private Context mContext;
-    List<ZtInfo> imgarrlist;
+    List<Kjkm> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
     float DownX = 0;
     float UpX = 0;
 
-    public ZtAdapter(Context c, List<ZtInfo> itemContent) {
+    public KjkmAdapter(Context c, List<Kjkm> itemContent) {
         mContext = c;
         imgarrlist = itemContent;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -30,7 +32,7 @@ public class ZtAdapter extends BaseAdapter {
         return imgarrlist.size();
     }
 
-    public ZtInfo getContactsItem(int position) {
+    public Kjkm getContactsItem(int position) {
         return imgarrlist.get(position);
     }
 
@@ -46,34 +48,22 @@ public class ZtAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ZtViewHolder holder;
-        ZtInfo item = imgarrlist.get(position);
+        KjkmViewHolder holder;
+        Kjkm item = imgarrlist.get(position);
         View localView = convertView;
         //判断当前view视图参数是否为null
         if (localView == null) {
             //加载一级视图的布局文件
-            localView = mLayoutInflater.inflate(R.layout.zt_list_item, null);
+            localView = mLayoutInflater.inflate(R.layout.kjkm_list_item, null);
 
-            holder = new ZtViewHolder();
-            holder.ztmc = (TextView) localView.findViewById(R.id.ztmc);
-//            holder.kjzd = (TextView) localView.findViewById(R.id.kjzd);
-            holder.qysj = (TextView) localView.findViewById(R.id.qysj);
-//            holder.qymc = (TextView) localView.findViewById(R.id.qymc);
-
+            holder = new KjkmViewHolder();
+            holder.text = (TextView) localView.findViewById(R.id.kmqc);
             localView.setTag(holder);
         } else {
-            holder = (ZtViewHolder) localView.getTag();
+            holder = (KjkmViewHolder) localView.getTag();
         }
-
-
-        holder.ztmc.setText(item.ztmc);
-//        holder.kjzd.setText(item.getKjzd());
-//        holder.qymc.setText(item.getQymc());
-        holder.qysj.setText(item.qysj);
-
+        holder.text.setText(item.text);
         holder.item = item;
-
-
         return localView;
     }
 

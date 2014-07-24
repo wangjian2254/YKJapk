@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:background="@color/headback"
+            android:gravity="center_vertical"
+
+             >
+<LinearLayout android:id="@+id/j_head" android:layout_width="fill_parent" android:layout_height="30dp"
+
+        >
+    <TextView
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证日期"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证号"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|center"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="摘要"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|right"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="借金额"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|right"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="贷金额"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|center"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="方向"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:gravity="center_vertical|right"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="余额"
+            android:textSize="16dp"
+            android:textColor="#000" />
+</LinearLayout>
+    <LinearLayout android:id="@+id/s_head" android:layout_width="fill_parent" android:layout_height="60dp"
+
+            >
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证日期"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证号"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="90dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:text="摘要"
+                android:textSize="16dp"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="单位/单价"
+                android:textColor="#000" />
+        <LinearLayout android:layout_width="160dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="借方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="数量"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="160dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="贷方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="数量"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="270dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="余额"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="数量"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="单价"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="方向"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout android:id="@+id/w_head" android:layout_width="fill_parent" android:layout_height="60dp"
+
+        >
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证日期"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证号"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="90dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:text="摘要"
+                android:textSize="16dp"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="币种/汇率"
+                android:textColor="#000" />
+        <LinearLayout android:layout_width="160dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="借方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="160dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="贷方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="270dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="余额"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="汇率"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="方向"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>
+    <LinearLayout android:id="@+id/a_head" android:layout_width="fill_parent" android:layout_height="60dp"
+
+            >
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证日期"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="凭证号"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="90dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:text="摘要"
+                android:textSize="16dp"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="单位/单价"
+                android:textColor="#000" />
+        <TextView
+                android:gravity="center_vertical|center"
+                android:layout_width="70dp"
+                android:layout_height="fill_parent"
+                android:padding="2dp"
+                android:textSize="16dp"
+                android:text="币种/汇率"
+                android:textColor="#000" />
+        <LinearLayout android:layout_width="230dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="借方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                    android:gravity="center_vertical|right"
+                    android:layout_width="70dp"
+                    android:layout_height="fill_parent"
+                    android:padding="2dp"
+                    android:text="数量"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="230dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="贷方"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="数量"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="410dp" android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                >
+            <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:padding="2dp"
+                    android:text="余额"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <LinearLayout android:layout_width="fill_parent" android:layout_height="30dp"
+                          android:orientation="horizontal"
+                    >
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="数量"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="单价"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="外币"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="70dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:textSize="16dp"
+                        android:text="汇率"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|center"
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="方向"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+                <TextView
+                        android:gravity="center_vertical|right"
+                        android:layout_width="90dp"
+                        android:layout_height="fill_parent"
+                        android:padding="2dp"
+                        android:text="金额"
+                        android:textSize="16dp"
+                        android:textColor="#000" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+

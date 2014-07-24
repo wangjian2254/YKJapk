@@ -70,17 +70,23 @@ public  class UrlTask {
                             // 配置本次连接的Content-type，配置为application/x-www-form-urlencoded的
                             // 意思是正文是urlencoded编码过的form参数，下面我们可以看到我们对正文内容使用URLEncoder.encode
                             // 进行编码
-                            con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                            if(urlSync.isIsjson()){
+                                //
+                                con.setRequestProperty("Content-Type","application/json; charset=UTF-8");
+                            }else{
+                                con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                            }
+
                             con.connect();
-                            DataOutputStream out = new DataOutputStream(con
-                                    .getOutputStream());
+                            PrintWriter  out = new PrintWriter(con.getOutputStream());
                             // The URL-encoded contend
                             // 正文，正文内容其实跟get的URL中 '? '后的参数字符串一致
 
 
 
                             // DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写到流里面
-                            out.writeBytes(urlSync.getParmString());
+//                            out.writeBytes(urlSync.getParmString());
+                            out.write(urlSync.getParmString());
 
                             out.flush();
                             out.close();
@@ -125,8 +131,10 @@ public  class UrlTask {
                         }catch (IOException e) {
                             e.printStackTrace();
                         }
+                        if(mypDialog!=null){
+                            mypDialog.dismiss();
+                        }
 
-                        mypDialog.dismiss();
                     } catch (IOException e) {
                         if(con!=null){
                             con.disconnect();
@@ -136,14 +144,18 @@ public  class UrlTask {
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
-                        mypDialog.dismiss();
+                        if(mypDialog!=null){
+                            mypDialog.dismiss();
+                        }
                     }catch (Exception e) {
                         try {
                             urlSync.doFailureResult();
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
-                        mypDialog.dismiss();
+                        if(mypDialog!=null){
+                            mypDialog.dismiss();
+                        }
                     }
 
             }
@@ -156,14 +168,16 @@ public  class UrlTask {
         if(mypDialog!=null && mypDialog.isShowing()){
             mypDialog.dismiss();
         }
-        mypDialog=new ProgressDialog(context);
-        mypDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mypDialog.setTitle(urlSync.getSyncTitle());
-        mypDialog.setMessage("正在载入……");
-        mypDialog.setIcon(R.drawable.icon);
-        mypDialog.setIndeterminate(false);
-        mypDialog.setCancelable(true);
-        mypDialog.show();
+        if(urlSync.getSyncTitle()!=null&&urlSync.getSyncTitle().length()>0){
+            mypDialog=new ProgressDialog(context);
+            mypDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mypDialog.setTitle(urlSync.getSyncTitle());
+            mypDialog.setMessage("正在载入……");
+            mypDialog.setIcon(R.drawable.icon);
+            mypDialog.setIndeterminate(false);
+            mypDialog.setCancelable(true);
+            mypDialog.show();
+        }
         th2.start();
     }
 

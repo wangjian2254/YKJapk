@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:orientation="horizontal"
+              android:layout_height="40dp"
+              android:background="@drawable/zt_list_item_selector"
+              android:gravity="center_vertical"
+              android:layout_margin="2px"
+
+
+        >
+
+    <TextView
+            android:id="@+id/txt0"
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证日期"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/pzbh"
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证日期"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/txt1"
+            android:gravity="center_vertical|center"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="摘要"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/hl"
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证日期"
+            android:textColor="#000" />
+            <TextView
+                    android:id="@+id/jwb"
+                    android:gravity="center_vertical|right"
+                    android:layout_width="70dp"
+                    android:layout_height="fill_parent"
+                    android:padding="2dp"
+                    android:text="数量"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <TextView
+                    android:id="@+id/txt2"
+                    android:gravity="center_vertical|right"
+                    android:layout_width="90dp"
+                    android:layout_height="fill_parent"
+                    android:padding="2dp"
+                    android:text="金额"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+
+            <TextView
+                    android:id="@+id/dwb"
+                    android:gravity="center_vertical|right"
+                    android:layout_width="70dp"
+                    android:layout_height="fill_parent"
+                    android:padding="2dp"
+                    android:text="数量"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+            <TextView
+                    android:id="@+id/txt3"
+                    android:gravity="center_vertical|right"
+                    android:layout_width="90dp"
+                    android:layout_height="fill_parent"
+                    android:padding="2dp"
+                    android:text="金额"
+                    android:textSize="16dp"
+                    android:textColor="#000" />
+
+    <TextView
+            android:id="@+id/yewb"
+            android:gravity="center_vertical|right"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="余额"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/yehl"
+            android:gravity="center_vertical|center"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="凭证日期"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/txt4"
+            android:gravity="center_vertical|center"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="方向"
+            android:textSize="16dp"
+            android:textColor="#000" />
+    <TextView
+            android:id="@+id/txt5"
+            android:gravity="center_vertical|right"
+            android:layout_width="90dp"
+            android:layout_height="fill_parent"
+            android:padding="2dp"
+            android:text="余额"
+            android:textSize="16dp"
+            android:textColor="#000" />
+
+</LinearLayout>
+
+

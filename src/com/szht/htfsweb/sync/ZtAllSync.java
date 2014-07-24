@@ -1,7 +1,10 @@
 package com.szht.htfsweb.sync;
 
 import android.os.Message;
-import com.szht.htfsweb.model.Zt;
+import com.activeandroid.query.Delete;
+import com.activeandroid.query.Select;
+import com.szht.htfsweb.db.ZtInfo;
+import com.szht.htfsweb.util.Convert;
 import com.szht.htfsweb.util.UrlSync;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,18 +28,24 @@ public class ZtAllSync extends UrlSync {
         if (result.length()>0) {
             if (getHandler() != null) {
                 Message hmsg = getHandler().obtainMessage();
-                List<Zt> list = new ArrayList<Zt>();
+                List<ZtInfo> list = new ArrayList<ZtInfo>();
                 JSONObject item=null;
-                Zt ztitem=null;
+                ZtInfo ztitem=null;
+                new Delete().from(ZtInfo.class).where("User = ?",Convert.currentUser.getId()).execute();
                 for(int i=0;i<result.length();i++){
                     item = result.getJSONObject(i);
-                    ztitem = new Zt();
-                    ztitem.setId(item.optString("ztdm",""));
-                    ztitem.setZtmc(item.optString("ztmc",""));
-                    ztitem.setKjzd(item.optString("kjzd", ""));
-                    ztitem.setQyid(item.optString("qyid",""));
-                    ztitem.setQymc(item.optString("ztmc",""));
-                    ztitem.setQysj(item.optString("qysj", ""));
+                    ztitem = new Select().from(ZtInfo.class).where("ztdm = ?",item.optString("ztdm","")).executeSingle();
+                    if(ztitem==null){
+                        ztitem = new ZtInfo();
+                    }
+                    ztitem.user = Convert.currentUser;
+                    ztitem.ztdm=item.optString("ztdm","");
+                    ztitem.ztmc=item.optString("ztmc","");
+                    ztitem.kjzd=item.optString("kjzd", "");
+                    ztitem.qyid=item.optString("qyid","");
+                    ztitem.qymc=item.optString("ztmc","");
+                    ztitem.qysj=item.optString("qysj", "");
+                    ztitem.save();
                     list.add(ztitem);
                 }
                 hmsg.obj = list;

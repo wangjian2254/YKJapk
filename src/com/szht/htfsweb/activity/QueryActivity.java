@@ -7,15 +7,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.*;
 import android.widget.*;
+import com.activeandroid.query.Select;
 import com.szht.htfsweb.R;
+import com.szht.htfsweb.adapter.KjkmAdapter;
 import com.szht.htfsweb.base.ActivitySupport;
-import com.szht.htfsweb.model.Zt;
-import com.szht.htfsweb.sync.LRBSync;
-import com.szht.htfsweb.sync.XJLLSync;
-import com.szht.htfsweb.sync.ZCFZSync;
-import com.szht.htfsweb.sync.ZtAllSync;
+import com.szht.htfsweb.db.BaseConfig;
+import com.szht.htfsweb.db.Kjkm;
+import com.szht.htfsweb.db.ZtInfo;
+import com.szht.htfsweb.sync.*;
 import com.szht.htfsweb.tools.DatePicker3DialogCustom;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
+import com.szht.htfsweb.tools.DatePicker_KJKM_DialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
 import com.szht.htfsweb.util.QYSJArrayUtil;
 import com.szht.htfsweb.util.UrlTask;
@@ -29,7 +31,7 @@ public class QueryActivity extends ActivitySupport  {
 
     private Handler ztHandler;
     Intent intent;
-    Zt zt;
+    ZtInfo zt;
     TextView ztmc;
     private Calendar calendar = null;
     private Dialog mdialog;
@@ -42,40 +44,54 @@ public class QueryActivity extends ActivitySupport  {
         ztmc = (TextView)findViewById(R.id.ztmc);
         intent = this.getIntent();
         Bundle bunde = intent.getExtras();
-        zt = (Zt)bunde.getSerializable("zt");
+        zt = (ZtInfo)bunde.getSerializable("zt");
 
-        ztmc.setText(zt.getZtmc());
+        ztmc.setText(zt.ztmc);
         ztHandler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
 
                 // // 接收子线程的消息
-                if (msg.arg1 == 1) {
+                if (msg.arg1 == 10) {
+                    syncKjkmList();
+                }
+                if (msg.arg1 == 11) {
 
                 }
                 if (msg.arg1 == 2) {
 
                     showToast(msg.obj.toString());
                 }
-
-
-
-
             }
 
         };
+        syncKjkmSyncList();
+
     }
 
-    private void syncZtList(){
-        IUrlSync urlSync = new ZtAllSync();
-        urlSync.setSyncTitle("获取账套信息");
-        urlSync.setToastContentFa("没有账套");
+    private void syncKjkmSyncList(){
+        //
+
+
+        KjkmTimelineSync urlSync = new KjkmTimelineSync();
+        urlSync.setZt(zt);
+//        urlSync.setSyncTitle("获取会计科目");
+        urlSync.setToastContentFa("获取会计科目失败");
         urlSync.setHandler(ztHandler);
         UrlTask urlTask = new UrlTask(context);
         urlTask.setUrlSync(urlSync);
         urlTask.start();
-//        showToast("正在获取账套列表……");
+    }
+    private void syncKjkmList(){
+        KjkmSync urlSync = new KjkmSync();
+        urlSync.setZt(zt);
+        urlSync.setSyncTitle("获取会计科目");
+        urlSync.setToastContentFa("获取会计科目失败");
+        urlSync.setHandler(ztHandler);
+        UrlTask urlTask = new UrlTask(context);
+        urlTask.setUrlSync(urlSync);
+        urlTask.start();
     }
 
 
@@ -85,8 +101,8 @@ public class QueryActivity extends ActivitySupport  {
             case R.id.mod_lrb:
                 final DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
                 String[] y=new String[1];
-                y[0]=zt.getQysj().substring(0,4);
-                String[] m= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                y[0]=zt.qysj.substring(0,4);
+                String[] m= QYSJArrayUtil.getMonthStrArr(zt.qysj);
                 localAlertDialogCustom.setYearList(y);
                 localAlertDialogCustom.setMonthList(m);
                 localAlertDialogCustom.show();
@@ -126,8 +142,8 @@ public class QueryActivity extends ActivitySupport  {
             case R.id.mod_zcfz:
                 final DatePickerDialogCustom datePicker = new DatePickerDialogCustom(context);
                 String[] y2=new String[1];
-                y2[0]=zt.getQysj().substring(0,4);
-                String[] m2= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                y2[0]=zt.qysj.substring(0,4);
+                String[] m2= QYSJArrayUtil.getMonthStrArr(zt.qysj);
                 datePicker.setYearList(y2);
                 datePicker.setMonthList(m2);
                 datePicker.show();
@@ -167,8 +183,8 @@ public class QueryActivity extends ActivitySupport  {
             case R.id.mod_xjllb:
                 final DatePicker3DialogCustom datePicker3 = new DatePicker3DialogCustom(context);
                 String[] y3=new String[1];
-                y3[0]=zt.getQysj().substring(0,4);
-                String[] m3= QYSJArrayUtil.getMonthStrArr(zt.getQysj());
+                y3[0]=zt.qysj.substring(0,4);
+                String[] m3= QYSJArrayUtil.getMonthStrArr(zt.qysj);
                 datePicker3.setYearList(y3);
                 datePicker3.setMonthList(m3);
                 datePicker3.show();
@@ -189,7 +205,7 @@ public class QueryActivity extends ActivitySupport  {
                         sync.setSyncTitle("现金流量表");
                         sync.setToastContentFa("查询失败");
 
-                        Intent mainIntent = new Intent(QueryActivity.this, QueryResultZCFZActivity.class);
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryResultXJLLActivity.class);
                         Bundle extras = new Bundle();
                         extras.putSerializable("zt", zt);
                         extras.putSerializable("sync", sync);
@@ -203,6 +219,68 @@ public class QueryActivity extends ActivitySupport  {
                     @Override
                     public void onCancelClick() {
 
+                    }
+                });
+                break;
+            case R.id.mod_zz:
+                final DatePicker_KJKM_DialogCustom datePicker4 = new DatePicker_KJKM_DialogCustom(context);
+                String[] m4= QYSJArrayUtil.getMonthStrArr(zt.qysj);
+                datePicker4.setMonthList(m4);
+                datePicker4.setZt(zt);
+                datePicker4.setBaseConfig((BaseConfig) new Select().from(BaseConfig.class).where("ztdm = ?",zt.ztdm).executeSingle());
+                datePicker4.show();
+                datePicker4.setMessage("总账查询");
+                datePicker4.setKjkmSelected(new DatePicker_KJKM_DialogCustom.AlertDialogSelectListener() {
+                    @Override
+                    public void onSelectedClick(Kjkm kjkm) {
+                        String param = datePicker4.getParam(kjkm.kmbh);
+                        ZzSync sync=new ZzSync();
+                        sync.setQjQ(datePicker4.getQ());
+                        sync.setQjZ(datePicker4.getZ());
+                        sync.setStyle(datePicker4.getZb_Style());
+                        sync.setIsjson(true);
+                        sync.setJsonparm(param);
+                        sync.setModth(IUrlSync.POST);
+                        sync.setSyncTitle("总账");
+                        sync.setToastContentFa("查询失败");
+
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryZzActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                break;
+            case R.id.mod_mx:
+                final DatePicker_KJKM_DialogCustom datePicker5 = new DatePicker_KJKM_DialogCustom(context);
+                String[] m5= QYSJArrayUtil.getMonthStrArr(zt.qysj);
+                datePicker5.setMonthList(m5);
+                datePicker5.setZt(zt);
+                datePicker5.setBaseConfig((BaseConfig) new Select().from(BaseConfig.class).where("ztdm = ?",zt.ztdm).executeSingle());
+                datePicker5.show();
+                datePicker5.setMessage("明细账查询");
+                datePicker5.setKjkmSelected(new DatePicker_KJKM_DialogCustom.AlertDialogSelectListener() {
+                    @Override
+                    public void onSelectedClick(Kjkm kjkm) {
+                        String param = datePicker5.getParam(kjkm.kmbh);
+                        MxSync sync=new MxSync();
+                        sync.setQjQ(datePicker5.getQ());
+                        sync.setQjZ(datePicker5.getZ());
+                        sync.setStyle(datePicker5.getZb_Style());
+                        sync.setIsjson(true);
+                        sync.setJsonparm(param);
+                        sync.setModth(IUrlSync.POST);
+                        sync.setSyncTitle("明细账");
+                        sync.setToastContentFa("查询失败");
+
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryMxActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
                     }
                 });
                 break;

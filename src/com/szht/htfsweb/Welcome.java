@@ -9,7 +9,9 @@ import android.os.Message;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.EditText;
+import com.activeandroid.query.Select;
 import com.szht.htfsweb.base.ActivitySupport;
+import com.szht.htfsweb.db.User;
 import com.szht.htfsweb.sync.LoginSync;
 import com.szht.htfsweb.util.Convert;
 import com.szht.htfsweb.util.IUrlSync;
@@ -45,6 +47,15 @@ public class Welcome extends ActivitySupport {
                 showToast(m.toString(),3000);
                 // // 接收子线程的消息
                 if (msg.arg1 == 1) {
+                    User user = new Select().from(User.class).where("username = ?",username.getText().toString()).executeSingle();
+                    if(user==null){
+                        user = new User();
+                        user.userName = username.getText().toString();
+                        user.passWord = password.getText().toString();
+                    }
+                    user.lashLoginTime = System.currentTimeMillis();
+                    user.save();
+                    Convert.currentUser=user;
                     Intent mainIntent = new Intent(Welcome.this, MainActivity.class);
                     Welcome.this.startActivity(mainIntent);
 

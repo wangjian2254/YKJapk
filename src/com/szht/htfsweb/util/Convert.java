@@ -1,5 +1,7 @@
 package com.szht.htfsweb.util;
 
+import com.szht.htfsweb.db.User;
+
 /**
  * Created by WangJian on 14-3-6.
  */
@@ -16,6 +18,10 @@ public class Convert {
     public static String currentYear=null;
     public static String currentMonth=null;
     public static String currentDay=null;
+
+    public static User currentUser;
+
+
     /*
     http://www.htykj.com.cn/htfsweb/j_spring_security_check
 http://www.htykj.com.cn/htfsweb/_002_QiYeAction.do?method=findComplyIOSByGrouping

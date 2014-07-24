@@ -1,7 +1,6 @@
 package com.szht.htfsweb.sync;
 
 import android.os.Message;
-import com.szht.htfsweb.model.Zt;
 import com.szht.htfsweb.util.UrlSync;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +11,7 @@ import java.util.List;
 public class SelectZtSync extends UrlSync {
     private    String uri="_005_SysLoginAcion.do?method=loginQyinfoZtlink";
     public boolean doPerResult()throws Exception{
-        if(getResult().length()==0){
+        if(getResult().length()==0||getResult().indexOf("var mainpath")>-1){
             return true;
         }
         return false;
@@ -23,7 +22,7 @@ public class SelectZtSync extends UrlSync {
         if (!doPerResult()) {
             return;
         }
-        if (getResult().length()==0) {
+        if (getResult().length()==0||getResult().indexOf("var mainpath")>-1) {
             if (getHandler() != null) {
                 Message hmsg = getHandler().obtainMessage();
 
