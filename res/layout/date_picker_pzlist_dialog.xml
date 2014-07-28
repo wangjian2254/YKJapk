@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/popbox_bg" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="16.0sp" android:textColor="@color/black" android:id="@+id/message" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <ImageView android:background="#ffd6d6d6" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginTop="15.0dip" />
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+        <TextView android:layout_width="wrap_content" android:layout_height="fill_parent"
+                  android:gravity="center_vertical" android:padding="5dp"
+                android:textColor="#000" android:text="起"
+                />
+        <com.szht.htfsweb.widget.WheelView android:id="@+id/monthQ"
+                                           android:layout_height="wrap_content"
+                                           android:layout_width="wrap_content"
+                                           android:layout_gravity="center_vertical"
+                                           android:layout_weight="1.0"/>
+        <com.szht.htfsweb.widget.WheelView android:id="@+id/monthQd"
+                                           android:layout_height="wrap_content"
+                                           android:layout_width="wrap_content"
+                                           android:layout_gravity="center_vertical"
+                                           android:layout_weight="1.0"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="fill_parent"
+                   android:gravity="center_vertical" android:padding="5dp"
+                  android:textColor="#000" android:text="止"
+                />
+        <com.szht.htfsweb.widget.WheelView android:id="@+id/monthZ"
+                                           android:layout_height="wrap_content"
+                                           android:layout_width="wrap_content"
+                                           android:layout_marginLeft="10dp"
+                                           android:layout_weight="1.0"/>
+        <com.szht.htfsweb.widget.WheelView android:id="@+id/monthZd"
+                                           android:layout_height="wrap_content"
+                                           android:layout_width="wrap_content"
+                                           android:layout_gravity="center_vertical"
+                                           android:layout_weight="1.0"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+        <Spinner android:id="@+id/zb_style" android:layout_width="fill_parent" android:layout_height="40dp">
+
+        </Spinner>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip"
+                  android:weightSum="1">
+
+       <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:textColor="#000" android:text="凭证编号起："/>
+        <EditText android:id="@+id/pzbhq" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="10.0dip">
+
+        <TextView android:layout_width="100dp" android:layout_height="wrap_content" android:textColor="#000" android:text="凭证编号止："/>
+        <EditText android:id="@+id/pzbhz" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+        <Button android:textColor="@color/dark_orange" android:id="@+id/dialog_button_ok" android:background="@drawable/bg_orange_btn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/dialog_button_ok" />
+        <TextView android:id="@+id/view" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <Button android:textColor="@color/text_blue" android:id="@+id/dialog_button_cancel" android:background="@drawable/bg_gray_btn" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/dialog_button_cancel" />
+    </LinearLayout>
+</LinearLayout>

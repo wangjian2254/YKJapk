@@ -18,6 +18,7 @@ import com.szht.htfsweb.sync.*;
 import com.szht.htfsweb.tools.DatePicker3DialogCustom;
 import com.szht.htfsweb.tools.DatePickerDialogCustom;
 import com.szht.htfsweb.tools.DatePicker_KJKM_DialogCustom;
+import com.szht.htfsweb.tools.DatePicker_PZList_DialogCustom;
 import com.szht.htfsweb.util.IUrlSync;
 import com.szht.htfsweb.util.QYSJArrayUtil;
 import com.szht.htfsweb.util.UrlTask;
@@ -281,6 +282,43 @@ public class QueryActivity extends ActivitySupport  {
                         extras.putSerializable("sync", sync);
                         mainIntent.putExtras(extras);
                         QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                break;
+            case R.id.mod_pzcx:
+                final DatePicker_PZList_DialogCustom datePicker6 = new DatePicker_PZList_DialogCustom(context);
+                String[] m6= QYSJArrayUtil.getMonthStrArr(zt.qysj);
+                datePicker6.setMonthList(m6);
+                datePicker6.setZt(zt);
+                datePicker6.show();
+                datePicker6.setMessage("明细账查询");
+                datePicker6.setOnOKListener("查询", new DatePicker_PZList_DialogCustom.AlertDialogOKListener() {
+
+                    @Override
+                    public void onOKClick() {
+
+
+                        IUrlSync sync=new PZListSync();
+                        sync.setModth(IUrlSync.POST);
+                        sync.setIsjson(true);
+                        sync.setJsonparm(datePicker6.getParam());
+                        sync.setSyncTitle("凭证查询");
+                        sync.setToastContentFa("查询失败");
+
+                        Intent mainIntent = new Intent(QueryActivity.this, QueryPZListActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("zt", zt);
+                        extras.putSerializable("sync", sync);
+                        mainIntent.putExtras(extras);
+                        QueryActivity.this.startActivity(mainIntent);
+                    }
+                });
+                datePicker6.setOnCancelListener("取消",new DatePicker_PZList_DialogCustom.AlertDialogCancelListener(){
+
+
+                    @Override
+                    public void onCancelClick() {
+
                     }
                 });
                 break;
