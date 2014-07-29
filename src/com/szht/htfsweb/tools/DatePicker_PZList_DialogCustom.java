@@ -107,10 +107,12 @@ data : [['ALL', '全部'], ['YJZ', '已记账'],
         monthZ.setVisibleItems(3);
         monthQ.setAdapter(new ArrayWheelAdapter<String>(montharr));
         monthZ.setAdapter(new ArrayWheelAdapter<String>(montharr));
+        monthZ.setCurrentItem(montharr.length-1);
         monthQd.setVisibleItems(3);
         monthZd.setVisibleItems(3);
-        monthQd.setAdapter(new ArrayWheelAdapter<String>(montharr));
-        monthZd.setAdapter(new ArrayWheelAdapter<String>(montharr));
+        monthQd.setAdapter(new ArrayWheelAdapter<String>(dayarr));
+        monthZd.setAdapter(new ArrayWheelAdapter<String>(dayarr));
+        monthZd.setCurrentItem(dayarr.length-1);
     }
 
 
@@ -232,9 +234,11 @@ data : [['ALL', '全部'], ['YJZ', '已记账'],
             param.put("jeEnd","");
             JSONArray fzdm = new JSONArray();
             fzdm.put(zt.qyid);
-            param.put("fzdm", fzdm);
+            param.put("fzdms", fzdm);
             param.put("jzf","");
             param.put("ccf","");
+            param.put("start","");
+            param.put("limit","200");
         } catch (JSONException e) {
             e.printStackTrace();
         }

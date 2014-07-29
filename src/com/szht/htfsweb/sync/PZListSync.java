@@ -2,14 +2,18 @@ package com.szht.htfsweb.sync;
 
 import android.os.Message;
 import com.szht.htfsweb.db.ZtInfo;
+import com.szht.htfsweb.model.PzListItem;
 import com.szht.htfsweb.model.ZzBB;
 import com.szht.htfsweb.model.ZzItem;
 import com.szht.htfsweb.util.UrlSync;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PZListSync extends UrlSync {
-    private    String uri="_302_PzLbAction.do?method=queryPzlb";
+    private    String uri="_302_PzLbAction.do?method=queryPzlb&limit=200";
     /*
     {"bbrq":"2014-07-23","kmbh":"1004","kmmc":"备用金","pageSize":"",
     "result":[
@@ -33,42 +37,59 @@ public class PZListSync extends UrlSync {
         if (!doPerResult()) {
             return;
         }
-        ZzBB zzBB = new ZzBB();
-        zzBB.bbrq = result.getString("bbrq");
-        zzBB.kmbh = result.getString("kmbh");
-        zzBB.kmmc = result.getString("kmmc");
 
-        ZzItem item =null;
 
-        JSONArray r = result.getJSONArray("result");
+        PzListItem item =null;
+        PzListItem pzitem =null;
+
+        String pzid = null;
+
+        List<PzListItem> l =new ArrayList<PzListItem>();
+        JSONArray r = result.getJSONArray("Pzlb312ShowVo");
         JSONObject b = null;
         for(int i=0;i<r.length();i++){
             b = r.getJSONObject(i);
-            item = new ZzItem();
-            item.dfje = b.getString("dfje");
-            item.dfsl = b.getString("dfsl");
-            item.dfwb = b.getString("dfwb");
-            item.fx = b.getString("fx");
-            item.jfje = b.getString("jfje");
-            item.jfsl = b.getString("jfsl");
-            item.jfwb = b.getString("jfwb");
-            item.kjnd = b.getString("kjnd");
-            item.kjqj = b.getString("kjqj");
-            item.kmbh = b.getString("kmbh");
+
+            item = new PzListItem();
+
             item.pzrq = b.getString("pzrq");
-            item.type = b.getString("type");
-            item.yefx = b.getString("yefx");
-            item.yefxBz = b.getString("yefxBz");
-            item.yeje = b.getString("yeje");
-            item.yesl = b.getString("yesl");
-            item.yewb = b.getString("yewb");
+            item.zh = b.getString("zh");
+            item.jje = b.getString("jje");
+            item.dje = b.getString("dje");
+            item.dfhj = b.getString("dfhj");
+            item.kminfo = b.getString("kminfo");
+
+            item.jzf = b.optString("jzf","");
+            item.fhf = b.optString("fhf","");
+            item.ccf = b.optString("ccf","");
+            if("Y".equalsIgnoreCase(item.jzf)){
+                item.status="已记账";
+            }
+            if("N".equalsIgnoreCase(item.jzf)&&"Y".equalsIgnoreCase(item.fhf)){
+                item.status="已审核";
+            }
+            if("N".equalsIgnoreCase(item.jzf)&&"N".equalsIgnoreCase(item.fhf)&&"Y".equalsIgnoreCase(item.ccf)){
+                item.status="已标错";
+            }
+            if("N".equalsIgnoreCase(item.jzf)&&"N".equalsIgnoreCase(item.fhf)&&"N".equalsIgnoreCase(item.ccf)){
+                item.status="未审核";
+            }
+
             item.zy = b.getString("zy");
-            zzBB.list.add(item);
+
+            if(!b.optString("pzid","").equals(pzid)){
+                pzitem= new PzListItem();
+                pzitem.pzinfo = "凭证编号："+item.zh+" 凭证日期："+item.pzrq+" 凭证状态："+item.status+" 合计："+item.dfhj;
+                l.add(pzitem);
+                pzid = b.optString("pzid","");
+            }
+
+            l.add(item);
         }
 
 
         Message hmsg = getHandler().obtainMessage();
-        hmsg.obj = zzBB;
+        hmsg.obj = l;
         hmsg.arg1 = 1;
         getHandler().sendMessage(hmsg);
         setHandler(null);

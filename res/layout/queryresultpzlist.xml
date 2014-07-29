@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/bg2"
+        >
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                  android:layout_height="50dp"
+                  android:background="@drawable/head2"
+                  android:paddingTop="10dp">
+        <TextView
+                android:id="@+id/querytitle"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:text="凭证列表"
+                android:textSize="24dp"
+                android:textColor="#fff" />
+    </LinearLayout>
+
+    <HorizontalScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ListView android:id="@+id/querylist" android:layout_width="wrap_content" android:layout_height="fill_parent">
+
+        </ListView>
+    </HorizontalScrollView>
+
+</LinearLayout>
+

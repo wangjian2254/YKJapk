@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:orientation="horizontal"
+              android:layout_height="40dp"
+              android:background="@drawable/zt_list_item_selector"
+              android:gravity="center_vertical"
+              android:layout_margin="2px"
+
+        >
+    <LinearLayout  android:id="@+id/linear_fl" android:layout_width="wrap_content" android:layout_height="40dp" android:orientation="horizontal" android:layout_margin="2px">
+        <TextView android:id="@+id/pzlist_zy"
+                  android:gravity="center_vertical|center"
+                  android:layout_width="140dp"
+                  android:layout_height="fill_parent"
+                  android:padding="2dp"
+                  android:textSize="16dp"
+                  android:text="摘要"
+                  android:textColor="#000" />
+        <TextView android:id="@+id/pzlist_km"
+                  android:gravity="center_vertical|center"
+                  android:layout_width="170dp"
+                  android:layout_height="fill_parent"
+                  android:padding="2dp"
+                  android:text="科目"
+                  android:textSize="16dp"
+                  android:textColor="#000" />
+        <TextView android:id="@+id/pzlist_jje"
+                  android:gravity="center_vertical|right"
+                  android:layout_width="120dp"
+                  android:layout_height="fill_parent"
+                  android:padding="2dp"
+                  android:text="借方金额"
+                  android:textSize="16dp"
+                  android:textColor="#000" />
+        <TextView android:id="@+id/pzlist_dje"
+                  android:gravity="center_vertical|right"
+                  android:layout_width="120dp"
+                  android:layout_height="fill_parent"
+                  android:padding="2dp"
+                  android:textSize="16dp"
+                  android:text="贷方金额"
+                  android:textColor="#000" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linear_pzinfo" android:layout_width="wrap_content" android:layout_height="40dp" android:orientation="horizontal" android:layout_margin="2px">
+        <TextView android:id="@+id/pzinfo"
+                  android:gravity="center_vertical|center"
+                  android:layout_width="550dp"
+                  android:layout_height="fill_parent"
+                  android:padding="2dp"
+                  android:textSize="16dp"
+                  android:text="凭证编号："
+                  android:textColor="#000" />
+    </LinearLayout>
+
+</LinearLayout>
+
+

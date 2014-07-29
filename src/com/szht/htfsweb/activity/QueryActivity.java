@@ -291,7 +291,7 @@ public class QueryActivity extends ActivitySupport  {
                 datePicker6.setMonthList(m6);
                 datePicker6.setZt(zt);
                 datePicker6.show();
-                datePicker6.setMessage("明细账查询");
+                datePicker6.setMessage("凭证列表查询");
                 datePicker6.setOnOKListener("查询", new DatePicker_PZList_DialogCustom.AlertDialogOKListener() {
 
                     @Override
@@ -302,7 +302,7 @@ public class QueryActivity extends ActivitySupport  {
                         sync.setModth(IUrlSync.POST);
                         sync.setIsjson(true);
                         sync.setJsonparm(datePicker6.getParam());
-                        sync.setSyncTitle("凭证查询");
+                        sync.setSyncTitle("凭证列表查询");
                         sync.setToastContentFa("查询失败");
 
                         Intent mainIntent = new Intent(QueryActivity.this, QueryPZListActivity.class);
