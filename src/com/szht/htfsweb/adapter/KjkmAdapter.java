@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.holder.KjkmViewHolder;
 import com.szht.htfsweb.adapter.holder.ZtViewHolder;
+import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.db.Kjkm;
 import com.szht.htfsweb.db.ZtInfo;
 
@@ -18,8 +19,6 @@ public class KjkmAdapter extends BaseAdapter {
     private Context mContext;
     List<Kjkm> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
-    float DownX = 0;
-    float UpX = 0;
 
     public KjkmAdapter(Context c, List<Kjkm> itemContent) {
         mContext = c;

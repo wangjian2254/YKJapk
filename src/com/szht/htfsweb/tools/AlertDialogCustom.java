@@ -4,6 +4,7 @@ package com.szht.htfsweb.tools;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -50,9 +51,14 @@ public class AlertDialogCustom extends Dialog
         super.onCreate(paramBundle);
         requestWindowFeature(1);
         setContentView(R.layout.alert_dialog);
-        Display localDisplay = getWindow().getWindowManager().getDefaultDisplay();
+
+
+
+//        Display localDisplay = getWindow().getWindowManager().getDefaultDisplay();
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindow().getWindowManager().getDefaultDisplay().getMetrics(metric);
         WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-        localLayoutParams.width = (int) (0.95D * localDisplay.getWidth());
+        localLayoutParams.width = (int)(metric.density*320*0.95);
         getWindow().setAttributes(localLayoutParams);
         this.message = ((TextView) findViewById(R.id.message));
         this.ok = ((Button) findViewById(R.id.dialog_button_ok));

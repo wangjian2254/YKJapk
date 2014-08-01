@@ -41,6 +41,7 @@
                 >
         <ImageView android:layout_width="100dp" android:layout_height="100dp"
                    android:src="@drawable/lrb"
+                   android:layout_centerHorizontal="true"
                 />
          <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                  android:text="利润表"
@@ -66,6 +67,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/zcfzb"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="资产负债表"
@@ -90,6 +92,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/xjllb"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="现金流量表"
@@ -121,6 +124,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/zz"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="总账"
@@ -146,6 +150,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/mx"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="明细账"
@@ -188,6 +193,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/pzcx"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="凭证查询"
@@ -213,6 +219,7 @@
                 >
             <ImageView android:layout_width="100dp" android:layout_height="100dp"
                        android:src="@drawable/zcfzb"
+                       android:layout_centerHorizontal="true"
                     />
             <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
                       android:text="凭证录入"

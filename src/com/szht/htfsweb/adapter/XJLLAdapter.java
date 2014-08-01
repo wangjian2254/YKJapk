@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.holder.LRBViewHolder;
+import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.LRBItem;
 import com.szht.htfsweb.model.XJLLItem;
 
@@ -17,8 +18,6 @@ public class XJLLAdapter extends BaseAdapter {
     private Context mContext;
     List<Object> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
-    float DownX = 0;
-    float UpX = 0;
 
     public XJLLAdapter(Context c, List<Object> itemContent) {
         mContext = c;

@@ -3,6 +3,7 @@ package com.szht.htfsweb.sync;
 import android.os.Message;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.szht.htfsweb.db.DataTimeLine;
 import com.szht.htfsweb.db.Kjkm;
 import com.szht.htfsweb.db.ZtInfo;
 import com.szht.htfsweb.util.Convert;
@@ -35,7 +36,7 @@ public class KjkmSync extends UrlSync {
                 List<Kjkm> list = new ArrayList<Kjkm>();
                 JSONObject item=null;
                 Kjkm ztitem=null;
-                new Delete().from(Kjkm.class).where("ztdm = ?",zt.getId()).execute();
+                new Delete().from(Kjkm.class).where("ztdm = ?",zt.ztdm).execute();
                 for(int i=0;i<result.length();i++){
                     item = result.getJSONObject(i);
                     ztitem = new Select().from(Kjkm.class).where("id = ?",item.optString("id","")).executeSingle();
@@ -94,6 +95,11 @@ public class KjkmSync extends UrlSync {
                 hmsg.arg1 = 2;
                 hmsg.sendToTarget();
                 setHandler(null);
+
+                DataTimeLine dtl = new Select().from(DataTimeLine.class).where("Ztdm =? and DataType=?",zt.ztdm,"kjkm").executeSingle();
+                if(dtl!=null){
+                    dtl.delete();
+                }
             }
         }
 
@@ -107,6 +113,10 @@ public class KjkmSync extends UrlSync {
             hmsg.arg1 = 2;
             hmsg.sendToTarget();
             setHandler(null);
+            DataTimeLine dtl = new Select().from(DataTimeLine.class).where("Ztdm =? and DataType=?",zt.ztdm,"kjkm").executeSingle();
+            if(dtl!=null){
+                dtl.delete();
+            }
         }
     }
 

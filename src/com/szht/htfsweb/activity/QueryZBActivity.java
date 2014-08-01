@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.activeandroid.query.Select;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.ZzAdapter;
+import com.szht.htfsweb.adapter.holder.ZZViewHolder;
 import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.db.BaseConfig;
 import com.szht.htfsweb.db.Kjkm;
@@ -72,7 +73,7 @@ public class QueryZBActivity extends ActivitySupport  {
         kjkm = (TextView)findViewById(R.id.kjkm);
         kjqj = (TextView)findViewById(R.id.kjqj);
 
-        querylist.addHeaderView(headerView);
+//        querylist.addHeaderView(headerView);
         querylist.setAdapter(baseAdapter);
 
         sync.setHandler(ztHandler);
@@ -106,9 +107,18 @@ public class QueryZBActivity extends ActivitySupport  {
         }
     }
 
+    private void initItemView(ZZViewHolder holder,View localView){
+        holder.txt0 = (TextView) localView.findViewById(R.id.txt0);
+        holder.txt1 = (TextView) localView.findViewById(R.id.txt1);
+        holder.txt2 = (TextView) localView.findViewById(R.id.txt2);
+        holder.txt3 = (TextView) localView.findViewById(R.id.txt3);
+        holder.txt4 = (TextView) localView.findViewById(R.id.txt4);
+        holder.txt5 = (TextView) localView.findViewById(R.id.txt5);
+    }
      public void initHead(String style){
 
         setHead(style);
+
         ZzAdapter zzAdapter  = new ZzAdapter(context, list);
         zzAdapter.setZb_style(style);
         querylist.setAdapter(zzAdapter);

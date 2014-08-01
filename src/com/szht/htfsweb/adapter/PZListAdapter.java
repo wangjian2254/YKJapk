@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.holder.PZListViewHolder;
 import com.szht.htfsweb.adapter.holder.ZZViewHolder;
+import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.PzListItem;
 import com.szht.htfsweb.model.ZzItem;
 
@@ -19,11 +20,13 @@ public class PZListAdapter extends BaseAdapter {
     private Context mContext;
     List<Object> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
+    private int screenWidth=0;
 
     public PZListAdapter(Context c, List<Object> itemContent) {
         mContext = c;
         imgarrlist = itemContent;
         mLayoutInflater = LayoutInflater.from(mContext);
+        screenWidth = ((ActivitySupport)c).getScreenWidth();
     }
 
     @Override

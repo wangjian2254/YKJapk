@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.holder.LRBViewHolder;
 import com.szht.htfsweb.adapter.holder.ZCFZViewHolder;
+import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.model.LRBItem;
 import com.szht.htfsweb.model.ZCFZItem;
 
@@ -18,13 +20,14 @@ public class ZCFZAdapter extends BaseAdapter {
     private Context mContext;
     List<Object> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
-    float DownX = 0;
-    float UpX = 0;
+
+    private int screenWidth=0;
 
     public ZCFZAdapter(Context c, List<Object> itemContent) {
         mContext = c;
         imgarrlist = itemContent;
         mLayoutInflater = LayoutInflater.from(mContext);
+        screenWidth = ((ActivitySupport)c).getScreenWidth();
     }
 
     @Override
@@ -61,6 +64,14 @@ public class ZCFZAdapter extends BaseAdapter {
             holder.txt3 = (TextView) localView.findViewById(R.id.txt3);
             holder.txt4 = (TextView) localView.findViewById(R.id.txt4);
             holder.txt5 = (TextView) localView.findViewById(R.id.txt5);
+            if((holder.txt0.getLayoutParams().width+holder.txt1.getLayoutParams().width+holder.txt2.getLayoutParams().width+holder.txt3.getLayoutParams().width+holder.txt4.getLayoutParams().width+holder.txt5.getLayoutParams().width)<screenWidth){
+                holder.txt0.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(180/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.txt1.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.txt2.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.txt3.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(180/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.txt4.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.txt5.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
 
             localView.setTag(holder);
         } else {

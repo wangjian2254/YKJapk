@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.adapter.holder.ZtViewHolder;
+import com.szht.htfsweb.base.ActivitySupport;
 import com.szht.htfsweb.db.ZtInfo;
 
 import java.util.List;
@@ -16,8 +17,6 @@ public class ZtAdapter extends BaseAdapter {
     private Context mContext;
     List<ZtInfo> imgarrlist;
     private LayoutInflater mLayoutInflater = null;
-    float DownX = 0;
-    float UpX = 0;
 
     public ZtAdapter(Context c, List<ZtInfo> itemContent) {
         mContext = c;

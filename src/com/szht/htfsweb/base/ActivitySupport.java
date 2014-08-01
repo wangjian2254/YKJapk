@@ -15,6 +15,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.szht.htfsweb.EimApplication;
@@ -53,6 +54,12 @@ public class ActivitySupport extends Activity implements IActivitySupport {
 
     }
 
+    public int getScreenWidth(){
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+        return metric.widthPixels;
+    }
 
 
     @Override

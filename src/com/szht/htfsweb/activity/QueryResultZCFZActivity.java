@@ -3,6 +3,7 @@ package com.szht.htfsweb.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.szht.htfsweb.R;
@@ -27,6 +28,21 @@ public class QueryResultZCFZActivity extends QueryResultActivity  {
         querylist = (ListView)findViewById(R.id.querylist);
         lrbAdapter = new ZCFZAdapter(context, list);
         headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.query_list_head_zcfz,querylist,false);
+        int screenWidth=getScreenWidth();
+        TextView txt0 = (TextView) headerView.findViewById(R.id.txt0);
+        TextView txt1 = (TextView) headerView.findViewById(R.id.txt1);
+        TextView txt2 = (TextView) headerView.findViewById(R.id.txt2);
+        TextView txt3 = (TextView) headerView.findViewById(R.id.txt3);
+        TextView txt4 = (TextView) headerView.findViewById(R.id.txt4);
+        TextView txt5 = (TextView) headerView.findViewById(R.id.txt5);
+        if((txt0.getLayoutParams().width+txt1.getLayoutParams().width+txt2.getLayoutParams().width+txt3.getLayoutParams().width+txt4.getLayoutParams().width+txt5.getLayoutParams().width)<screenWidth){
+            txt0.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(180/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            txt1.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            txt2.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            txt3.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(180/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            txt4.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            txt5.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(80/680.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
 
 
         initUI();
