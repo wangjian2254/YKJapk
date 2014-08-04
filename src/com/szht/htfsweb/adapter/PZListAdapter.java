@@ -63,9 +63,17 @@ public class PZListAdapter extends BaseAdapter {
                 holder.dje = (TextView)localView.findViewById(R.id.pzlist_dje);
 
                 holder.pzinfo = (TextView)localView.findViewById(R.id.pzinfo);
-            holder.linear_fl = (LinearLayout)localView.findViewById(R.id.linear_fl);
-            holder.linear_pzinfo = (LinearLayout)localView.findViewById(R.id.linear_pzinfo);
+                holder.linear_fl = (LinearLayout)localView.findViewById(R.id.linear_fl);
+                holder.linear_pzinfo = (LinearLayout)localView.findViewById(R.id.linear_pzinfo);
 
+            if((holder.zy.getLayoutParams().width+holder.km.getLayoutParams().width+holder.dje.getLayoutParams().width+holder.jje.getLayoutParams().width)<screenWidth){
+                holder.zy.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(140/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.km.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(170/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.jje.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(120/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.dje.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(120/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+                holder.pzinfo.setLayoutParams(new LinearLayout.LayoutParams(screenWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            }
 
 
             localView.setTag(holder);

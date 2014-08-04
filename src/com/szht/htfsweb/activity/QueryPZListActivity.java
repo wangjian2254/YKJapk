@@ -52,6 +52,19 @@ public class QueryPZListActivity extends ActivitySupport  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.queryresultpzlist);
         headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.query_list_head_pzlist,querylist,false);
+        TextView zy = (TextView)headerView.findViewById(R.id.zy);
+        TextView km = (TextView)headerView.findViewById(R.id.km);
+        TextView jje = (TextView)headerView.findViewById(R.id.jje);
+        TextView dje = (TextView)headerView.findViewById(R.id.dje);
+        int screenWidth = getScreenWidth();
+        if((zy.getLayoutParams().width+km.getLayoutParams().width+dje.getLayoutParams().width+jje.getLayoutParams().width)<screenWidth){
+            zy.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(140/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            km.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(170/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            jje.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(120/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+            dje.setLayoutParams(new LinearLayout.LayoutParams((int)(screenWidth*(120/550.0)-0.5), ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        }
+
         ztHandler = new Handler() {
 
             @Override
