@@ -48,6 +48,7 @@ public class QueryActivity extends ActivitySupport  {
         zt = (ZtInfo)bunde.getSerializable("zt");
 
         ztmc.setText(zt.ztmc);
+        // 账套请求 结果处理
         ztHandler = new Handler() {
 
             @Override
@@ -71,6 +72,9 @@ public class QueryActivity extends ActivitySupport  {
 
     }
 
+    /**
+     * 同步会计科目时间戳，如果本机存储的会计科目时间戳小于服务器端，则需要更新。
+     */
     private void syncKjkmSyncList(){
         //
 
@@ -84,6 +88,10 @@ public class QueryActivity extends ActivitySupport  {
         urlTask.setUrlSync(urlSync);
         urlTask.start();
     }
+
+    /**
+     * 同步会计科目。保存会计科目的同时保存时间戳。
+     */
     private void syncKjkmList(){
         KjkmSync urlSync = new KjkmSync();
         urlSync.setZt(zt);
@@ -96,9 +104,13 @@ public class QueryActivity extends ActivitySupport  {
     }
 
 
-
+    /**
+     * 界面按钮的逻辑处理
+     * @param v
+     */
     public void onQuery(View v) {
         switch (v.getId()){
+            //利润表查询
             case R.id.mod_lrb:
                 final DatePickerDialogCustom localAlertDialogCustom = new DatePickerDialogCustom(context);
                 String[] y=new String[1];
@@ -112,7 +124,7 @@ public class QueryActivity extends ActivitySupport  {
 
                     @Override
                     public void onOKClick() {
-
+                        //构建好查询条件，进入界面后查询
                         year = localAlertDialogCustom.getSelectedYear();
                         month = localAlertDialogCustom.getSelectedMonth();
                         IUrlSync sync=new LRBSync();
@@ -140,6 +152,7 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 break;
+            //资产负债表的查询
             case R.id.mod_zcfz:
                 final DatePickerDialogCustom datePicker = new DatePickerDialogCustom(context);
                 String[] y2=new String[1];
@@ -153,7 +166,7 @@ public class QueryActivity extends ActivitySupport  {
 
                     @Override
                     public void onOKClick() {
-
+                        //构建好查询条件，进入界面后查询
                         year = datePicker.getSelectedYear();
                         month = datePicker.getSelectedMonth();
                         IUrlSync sync=new ZCFZSync();
@@ -181,6 +194,7 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 break;
+            //现金流量表的查询
             case R.id.mod_xjllb:
                 final DatePicker3DialogCustom datePicker3 = new DatePicker3DialogCustom(context);
                 String[] y3=new String[1];
@@ -194,7 +208,7 @@ public class QueryActivity extends ActivitySupport  {
 
                     @Override
                     public void onOKClick() {
-
+                        //构建好查询条件，进入界面后查询
                         year = datePicker3.getSelectedYear();
                         month = datePicker3.getSelectedMonth();
                         IUrlSync sync=new XJLLSync();
@@ -223,6 +237,7 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 break;
+            //总账查询
             case R.id.mod_zz:
                 final DatePicker_KJKM_DialogCustom datePicker4 = new DatePicker_KJKM_DialogCustom(context);
                 String[] m4= QYSJArrayUtil.getMonthStrArr(zt.qysj);
@@ -234,6 +249,7 @@ public class QueryActivity extends ActivitySupport  {
                 datePicker4.setKjkmSelected(new DatePicker_KJKM_DialogCustom.AlertDialogSelectListener() {
                     @Override
                     public void onSelectedClick(Kjkm kjkm) {
+                        //构建好查询条件，进入界面后查询
                         String param = datePicker4.getParam(kjkm.kmbh);
                         ZzSync sync=new ZzSync();
                         sync.setQjQ(datePicker4.getQ());
@@ -254,6 +270,7 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 break;
+            //明细账
             case R.id.mod_mx:
                 final DatePicker_KJKM_DialogCustom datePicker5 = new DatePicker_KJKM_DialogCustom(context);
                 String[] m5= QYSJArrayUtil.getMonthStrArr(zt.qysj);
@@ -265,6 +282,7 @@ public class QueryActivity extends ActivitySupport  {
                 datePicker5.setKjkmSelected(new DatePicker_KJKM_DialogCustom.AlertDialogSelectListener() {
                     @Override
                     public void onSelectedClick(Kjkm kjkm) {
+                        //构建好查询条件，进入界面后查询
                         String param = datePicker5.getParam(kjkm.kmbh);
                         MxSync sync=new MxSync();
                         sync.setQjQ(datePicker5.getQ());
@@ -285,6 +303,7 @@ public class QueryActivity extends ActivitySupport  {
                     }
                 });
                 break;
+            //凭证查询
             case R.id.mod_pzcx:
                 final DatePicker_PZList_DialogCustom datePicker6 = new DatePicker_PZList_DialogCustom(context);
                 String[] m6= QYSJArrayUtil.getMonthStrArr(zt.qysj);
@@ -296,8 +315,7 @@ public class QueryActivity extends ActivitySupport  {
 
                     @Override
                     public void onOKClick() {
-
-
+                        //构建好查询条件，进入界面后查询
                         IUrlSync sync=new PZListSync();
                         sync.setModth(IUrlSync.POST);
                         sync.setIsjson(true);

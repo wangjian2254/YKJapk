@@ -60,6 +60,7 @@ public class MainActivity extends ActivitySupport {
         View headerView = ((LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.zt_list_head,ztlist,false);
         ztlist.addHeaderView(headerView);
         ztlist.setAdapter(ztAdapter);
+        //账套列表的点击事件
         ztlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -76,6 +77,7 @@ public class MainActivity extends ActivitySupport {
                 localAlertDialogCustom.setMonthList(m);
                 localAlertDialogCustom.show();
                 localAlertDialogCustom.setMessage("选择业务日期");
+                //点击账套 产生的 日期选择
                 localAlertDialogCustom.setOnOKListener("确定", new YWDatePickerDialogCustom.AlertDialogOKListener() {
 
                     @Override
@@ -111,12 +113,14 @@ public class MainActivity extends ActivitySupport {
             }
         });
 
+        //账套相关的异步处理
         ztHandler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
 
                 // // 接收子线程的消息
+                // 刷新账套列表
                 if (msg.arg1 == 1) {
                     List<ZtInfo> m = (List)msg.obj;
                     ztArrayList.clear();
@@ -124,10 +128,12 @@ public class MainActivity extends ActivitySupport {
                     ztAdapter.notifyDataSetChanged();
 
                 }
+                //请求失败，按照失败信息显示给用户。
                 if (msg.arg1 == 2) {
 
                     showToast(msg.obj.toString());
                 }
+                //选择了账套，发出获取账套系统信息
                 if(msg.arg1 == 3){
                     BaseConfigSync urlSync = new BaseConfigSync();
                     urlSync.setSyncTitle("获取账套系统信息");
@@ -138,6 +144,7 @@ public class MainActivity extends ActivitySupport {
                     urlTask.setUrlSync(urlSync);
                     urlTask.start();
                 }
+                //获取账套系统信息成功，跳转界面至查询主界面
                 if(msg.arg1 == 4){
                     Intent mainIntent = new Intent(MainActivity.this, QueryActivity.class);
                     Bundle extras = new Bundle();
@@ -156,6 +163,9 @@ public class MainActivity extends ActivitySupport {
         syncZtList();
     }
 
+    /**
+     * 同步账套列表，一般在进入系统后，如果没有缓存账套列表，则显示loading界面，否则后台默认运行请求
+     */
     private void syncZtList(){
         IUrlSync urlSync = new ZtAllSync();
         if(ztArrayList.size()==0){
@@ -177,6 +187,10 @@ public class MainActivity extends ActivitySupport {
         populateMenu(menu);
     }
 
+    /**
+     * 自定义菜单
+     * @param menu
+     */
     public void populateMenu(Menu menu) {
         menu.add(Menu.NONE, SEARCHPLUGIN, Menu.NONE, "联系我们");
         menu.add(Menu.NONE, APPLIST, Menu.NONE, "重新登录");
@@ -195,6 +209,12 @@ public class MainActivity extends ActivitySupport {
     public boolean onContextItemSelected(MenuItem item) {
         return (applyMenuChoice(item) || super.onContextItemSelected(item));
     }
+
+    /**
+     * 定义菜单的处理逻辑
+     * @param item
+     * @return
+     */
     public boolean applyMenuChoice(MenuItem item) {
         switch (item.getItemId()) {
             case SEARCHPLUGIN:

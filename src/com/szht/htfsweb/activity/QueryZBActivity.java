@@ -115,6 +115,11 @@ public class QueryZBActivity extends ActivitySupport  {
         holder.txt4 = (TextView) localView.findViewById(R.id.txt4);
         holder.txt5 = (TextView) localView.findViewById(R.id.txt5);
     }
+
+    /**
+     * 初始化头部样式文件，创建内容代理器
+     * @param style
+     */
      public void initHead(String style){
 
         setHead(style);
@@ -134,8 +139,10 @@ public class QueryZBActivity extends ActivitySupport  {
     }
 
 
-
-
+    /**
+     * 查询按钮事件，显示出时间选择器，在查询按钮中进行查询
+     * @param v
+     */
     protected void onQuery(View v) {
         final DatePicker_KJKM_DialogCustom datePicker4 = new DatePicker_KJKM_DialogCustom(context);
         String[] m4= QYSJArrayUtil.getMonthStrArr(zt.qysj);

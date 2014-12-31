@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.szht.htfsweb.EimApplication;
 import com.szht.htfsweb.R;
 import com.szht.htfsweb.util.Convert;
-import com.szht.htfsweb.util.NHelper;
+//import com.szht.htfsweb.util.NHelper;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -46,7 +46,7 @@ public class ActivitySupport extends Activity implements IActivitySupport {
         pg = new ProgressDialog(context);
         eimApplication = (EimApplication) getApplication();
         eimApplication.addActivity(this);
-        NHelper.getNHelper().init(this);
+//        NHelper.getNHelper().init(this);
 
 
 

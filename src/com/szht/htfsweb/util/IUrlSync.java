@@ -96,8 +96,8 @@ public interface IUrlSync extends Serializable {
 	
 	public boolean isNeedConnect();
 	public void addConnectNum();
-	public UserInfo getUser();
-	public void setUser(UserInfo user);
+//	public UserInfo getUser();
+//	public void setUser(UserInfo user);
 
     public String getSyncTitle();
 

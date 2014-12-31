@@ -38,6 +38,7 @@ public class Welcome extends ActivitySupport {
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
 
+        //登录异步处理
         loginHandler = new Handler() {
 
             @Override
@@ -74,6 +75,10 @@ public class Welcome extends ActivitySupport {
         };
     }
 
+    /**
+     * 登录按钮事件
+     * @param view
+     */
     public void login(View view){
         if(username.getText().toString().length()==0||password.getText().toString().length()==0){
             showToast("请填写用户名和密码",3000);

@@ -49,7 +49,7 @@ public class UrlSync implements IUrlSync {
 	private Handler handler=null;
 	private JSONObject jsonobj=null;
 	
-	private UserInfo user;
+//	private UserInfo user;
 
     private Map<String,String> parm = new HashMap<String,String>();
     public Map<String,String> getParm(){
@@ -339,12 +339,12 @@ public class UrlSync implements IUrlSync {
 	public void setJsonobj(JSONObject jsonobj) {
 		this.jsonobj = jsonobj;
 	}
-	public UserInfo getUser() {
-		return user;
-	}
-	public void setUser(UserInfo user) {
-		this.user = user;
-	}
+//	public UserInfo getUser() {
+//		return user;
+//	}
+//	public void setUser(UserInfo user) {
+//		this.user = user;
+//	}
 
 
     public String getSyncTitle() {
